@@ -1,0 +1,184 @@
+\chapter{Špecifikácia}
+\label{kap:specifikacia}
+
+V tejto kapitole spíšeme informácie o textových advetúrach a špecifikáciu
+našej aplikácie.
+
+\section{Textové adventúry}
+\label{sec:textadventures}
+
+Textové adventúry sú jednými z najstarších typov počítačových hier, ktoré spadajú
+pod žáner dobrodružné. Používateľ využíva na interakciu v hre spravidla iba text,
+ktorý je vstupom, a hra následne odpovedá taktiež textovým výstupom.
+Vstup je väčšinou zadávaný používateľom vo forme krátkych slovných spojení
+typu \glqq vziať kľúč \grqq alebo \glqq choď vpred \grqq, ktoré sú spracovávané
+textovým parserom.
+
+Prvé parsery rozumeli iba dvojslovným spojeniam typu sloveso + podstatné meno. Neskôr
+boli vyvinuté také, ktoré už rozumeli celým vetám.~\cite{bib:adventures}
+
+
+\subsection{go-term-adventures}
+\label{sec:textadventures:gta}
+
+Takýmito textovými adventúrami sú aj takzvané go-term-adventures (ďalej GTA) (\url{https://github.com/NaiveNeuron/go-term-adventures}), ktoré vznikli
+na Fakulte matematiky, fyziky a informatiky UK ako projekt pre kurz Linux pre
+používateľov. Hlavným motívom pre tvorbu GTA bolo zefektívnenie cvičení.
+
+Študentov cvičením sprevádza vopred vygenerovaný samorozbaľovací skript. Cvičenie
+je rozdelené do takzvaných levelov. Každý level začína vypísaním zadania priamo do
+terminálu. Následne je používateľ vyzvaný napísať príkaz v termináli. Ak príkaz
+vráti správny výstup, skript pošle používateľa do ďalšieho levelu. Týmto štýlom
+študent nemusí prepínať medzi zadaním a terminálom, a taktiež má priamo overenú správnosť
+výstupu príkazu.
+
+Skript počas práce študenta zachytáva všetky príkazy a zapisuje ich do textového
+dokumentu spoločne s časom vykonania. Ten po cvičení odošlú a prednášajúci ich vie
+obodovať.
+
+\section{Motivácia}
+\label{sec:motivacia}
+
+V akademickom roku 2016/2017 si kurz Linux pre používateľov na FMFI UK zapísalo
+90 študentov. Na cvičeniach sa väčšinou snažilo pomáhať 6 cvičiacich. Študenti riešili
+úlohy a často sa stávalo, že potrebovali pomôcť a dlhšiu dobu sa neprihlásili. Pri tak veľkom počte študentov je ťažké zisťovať, kto sa zasekol na danej úlohe. Preto sme sa
+rozhodli naprogramovať aplikáciu, ktorá bude monitorovať priebeh cvičenia a cvičiacim
+ho vizualizovať v reálnom čase.
+
+\section{Požiadavky na aplikáciu}
+\label{sec:apprequirements}
+
+V nasledujúcich bodoch vymenujeme požiadavky na našu aplikáciu
+
+\begin{itemize}
+	\item Zbieranie dát z GTA aplikácie od každého jedného študenta
+	\item Ukladanie dát do databázy
+	\item Zobrazovanie priebehu cvičenia všetkým klientom v reálnom čase
+	\item Prehľad historických cvičení
+	\item Možnosť obodovať jednotlivé riešenia a exportovať body do csv súboru
+	\item Detekcia neaktivity študentov
+	\item Detekcia príliš podobných riešení študentov
+\end{itemize}
+
+Nižšie sa pozrieme na niektoré naše požiadavky podrobnejšie.
+
+\subsection{Zbieranie dát z GTA aplikácie od každého jedného študenta}
+\label{sec:apprequirements:gtadata}
+
+Aby sme mohli monitorovať aktuálny stav študentov, potrebujeme mať záznam o
+všetkých akciách, ktoré študenti vykonali v termináli počas cvičenia.
+Dáta budú posielané požiadavkami typu POST v široko používanom JSON formáte.
+
+Každá z požiadaviek bude obsahovať základné informácie o počítači, na ktorom
+študent pracuje spolu s dátumom a časom odoslania, typom požiadavky a číslom cvičenia.
+
+\begin{lstlisting}
+{
+    "type": "typ poziadavky",
+    "user": "$USER",
+    "hostname": "`hostname`",
+    "ip": "lokalna ip pocitaca",
+    "exercise_number": cislo cvicenia,
+    "date": "datum a cas"
+}
+\end{lstlisting}
+
+Špecifikujme ďalej typy POST požiadaviek:
+
+\subsubsection{Typ start}
+\label{sec:apprequirements:gtadata:start}
+
+Keď študent spustí GTA skript.
+
+\begin{lstlisting}
+{
+    "type": "start",
+    "user": "$USER",
+    "hostname": "`hostname`",
+    "ip": "lokalna ip pocitaca",
+    "exercise_number": cislo cvicenia,
+    "date": "datum a cas"
+}
+\end{lstlisting}
+
+\subsubsection{Typ command}
+\label{sec:apprequirements:gtadata:command}
+
+Keď študent napíše v temináli príkaz a stlačí enter.
+Položka \textit{level} označuje level, v ktorom sa študent nachádza. Položka
+\textit{command} označuje odoslaný príkaz.
+
+\begin{lstlisting}
+{
+    "type": "command",
+    "user": "$USER",
+    "hostname": "`hostname`",
+    "ip": "local computer ip",
+    "exercise_number": cislo cvicenia,
+    "date": "datum a cas",
+    "level": cislo levelu,
+    "command": "prikaz z terminalu",
+}
+\end{lstlisting}
+
+\subsubsection{Typ passed}
+\label{sec:apprequirements:gtadata:passed}
+
+Keď študent prejde level. Takisto chceme mať záznam o tom, akým príkazom sa mu podarilo
+prejsť daný level.
+
+\begin{lstlisting}
+{
+    "type": "passed",
+    "user": "$USER",
+    "hostname": "`hostname`",
+    "ip": "local computer ip",
+    "exercise_number": cislo cvicenia,
+    "date": "datum a cas",
+    "level": cislo levelu,
+    "command": "prikaz z terminalu",
+}
+\end{lstlisting}
+
+\subsubsection{Typ exit}
+\label{sec:apprequirements:gtadata:exit}
+
+Keď študent ukončí cvičenie napísaním \textit{exit} v termináli.
+
+\begin{lstlisting}
+{
+    "type": "exit",
+    "user": "$USER",
+    "hostname": "`hostname`",
+    "ip": "lokalna ip pocitaca",
+    "exercise_number": cislo cvicenia,
+    "date": "datum a cas"
+}
+\end{lstlisting}
+
+\subsection{Zobrazovanie priebehu cvičenia všetkým klientom v reálnom čase}
+\label{sec:apprequirements:visualization}
+
+Cvičiacim chceme priniesť prehľad o aktuálnom stave všetkých študentov riešiacich
+cvičenie. Preto je potrebná pekná vizualizácia v reálnom čase. Nechceme, aby si museli
+inštalovať nejaký softvér, preto bude najlepšie využiť webový prehliadač.
+
+\subsection{Prehľad historických cvičení}
+\label{sec:apprequirements:overview}
+
+Je dôležité, aby si tvorcovia jednotlivých úloh na cvičenie vedeli spätne pozrieť
+ich náročnosť a poprípade v budúcnosti upraviť zadanie.
+
+\subsection{Možnosť obodovať jednotlivé riešenia a exportovať body do csv súboru}
+\label{sec:apprequirements:export}
+
+Kurz prebieha v e-learningovom systéme Moodle. Každý študent si tam vie prezerať
+svoje body za cvičenia, testy a podobne. Systém Moodle akceptuje aj takzvaný
+csv súbor hodnotenia, ktorý prednášajúci nahrá a body budú automaticky pridelené
+študentom.
+
+\subsection{Detekcia neaktivity študentov}
+\label{sec:apprequirements:noactivity}
+
+\subsection{Detekcia príliš podobných riešení študentov}
+\label{sec:apprequirements:similarsolutions}
