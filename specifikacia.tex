@@ -1,8 +1,37 @@
 \chapter{Špecifikácia}
 \label{kap:specifikacia}
 
-V tejto kapitole spíšeme informácie o textových advetúrach a špecifikáciu
-našej aplikácie.
+Táto kapitola obsahuje informácie o monitorovacích systémoch, textových advetúrach a špecifikáciu našej aplikácie.
+
+\section{Monitorovacie systémy}
+\label{sec:monitorsystems}
+
+Monitorovacie systémy sú neoddeliteľnou súčasťou pri vývoji a spravovaní rôznych
+komponentov hardvéru, softvéru, mechanických častí a podobne. Dávajú nám dôležité
+informácie o ich stave, vedia nás včas upozorňovať o potenciálnych hrozbách,
+zbierajú dáta, ktoré vieme vyhodnocovať a predísť podobným prípadom v budúcnosti.
+
+Priblížme si niektoré typy monitorovacích systémov.
+
+\textit{Sieťové} sledujú dostupnosť webových služieb, mailových serverov, využitie
+diskového priestoru, oneskorenie odpovede alebo možný DDoS útok. Následne vedia informovať administrátora o týchto skutočnostiach. Príkladom takéhoto systému je Zabbix.
+~\cite{bib:networkmonitoring}
+
+\textit{Softvérové} zbierajú informácie o vyťažovaní procesorov, RAM pamäte, celkovom
+stave aplikácií. V unixových systémoch je na vizualizáciu týchto informácií využívaný
+program \textit{top} respektíve \textit{htop}.
+
+\textit{Hardvérové} sú využívané napríklad na sledovanie teploty zariadenia, funkčnosti rôznych mechanických častí, tlaku v nádržiach s kvapalinami atď. 
+
+Na monitorovanie \textit{počasia} sú taktiež využívané rôznorodé senzory a satelity.
+Pomocou nich vieme získavať cenné dáta o aktuálnom stave počasia takmer hocikde
+na zemi, ktoré sú zúžitkované na predpovede alebo varovanie obyvateľstva pred
+blížiacou sa prírodnou katastrofou.
+
+Všetky tieto systémy majú dôležité spoločné črty. Vedia zbierať dáta, spracovávať ich,
+vyhodnocovať, vizualizovať a informovať administrátorov a používateľov o neštandardnom
+správaní. Táto práca sa zaoberá monitorovacím systémom, ktorý sleduje aktivitu
+študentov na cvičení.
 
 \section{Textové adventúry}
 \label{sec:textadventures}
@@ -11,46 +40,49 @@ Textové adventúry sú jednými z najstarších typov počítačových hier, kt
 pod žáner dobrodružné. Používateľ využíva na interakciu v hre spravidla iba text,
 ktorý je vstupom, a hra následne odpovedá taktiež textovým výstupom.
 Vstup je väčšinou zadávaný používateľom vo forme krátkych slovných spojení
-typu \glqq vziať kľúč \grqq alebo \glqq choď vpred \grqq, ktoré sú spracovávané
-textovým parserom.
+typu \glqq vziať kľúč\grqq~alebo \glqq choď vpred\grqq, ktoré sú spracovávané
+textovým parserom. Prvé parsery rozumeli iba dvojslovným spojeniam typu sloveso + podstatné meno. Neskôr boli vyvinuté také, ktoré už rozumeli celým vetám.
 
-Prvé parsery rozumeli iba dvojslovným spojeniam typu sloveso + podstatné meno. Neskôr
-boli vyvinuté také, ktoré už rozumeli celým vetám.~\cite{bib:adventures}
+Napriek neprítomnosti grafického prostredia môžu tieto typy hier popisovať prostredie, v ktorom sa hráč pohybuje, čo rozvíja predstavivosť. Taktiež môže vytvárať nelogické
+prostredie, kde z bodu A sa dá dostať do bodu B, ale z bodu B sa už reverzným pohybom
+nedostaneme do bodu A.~\cite{bib:adventures}
 
-\subsection{Kurz Linux pre používateľov}
-\label{sec:textadventures:linuxforusers}
 
-Kurz Linux pre používateľov sa snaží byť úvodom do operačného systému Linux
-na používateľskej úrovni. Študenti sa učia pracovať v termináli so základnými
-príkazmi. Vytvárajú priečink, vyhľadávajú a prepisujú určité úseky v texte,
-počítajú rôzne štatistické údaje z dát a podobne.
-
-Do akademického roku 2015/2016 sa študenti na cvičeniach snažili vytvárať príkazy v
-termináli, a keď si boli istý, že funguje, tak ho skopírovali a poslali na obodovanie.
-Neskôr, od roku 2016/2017 vznikol projekt go-term-adventures, pomocou ktorého sa
-cvičenia stali viac interkatívnejšími a zefektívnili prácu na nich. V sekcii
-~\ref{sec:textadventures:gta} si povieme o tomto projekte viac.
+\section{Motivácia}
+\label{sec:motivacia}
 
 \subsection{go-term-adventures}
-\label{sec:textadventures:gta}
+\label{sec:motivacia:gta}
 
-Textovými adventúrami sú aj takzvané go-term-adventures (ďalej GTA) (\url{https://github.com/NaiveNeuron/go-term-adventures}), ktoré vznikli
-na Fakulte matematiky, fyziky a informatiky UK ako projekt pre kurz Linux pre
-používateľov. Hlavným motívom pre tvorbu GTA bolo zefektívnenie cvičení.
+Textovými adventúrami sú aj takzvané \textit{go-term-adventures} (ďalej GTA) (\url{https://github.com/NaiveNeuron/go-term-adventures})~\cite{bib:gta}, ktoré vznikli
+na Fakulte matematiky, fyziky a informatiky Univerzity Komenského ako projekt pre kurz Linux pre používateľov. Hlavným motívom pre tvorbu GTA bolo zefektívnenie cvičení.
+Ako už samotný názov napovedá, GTA aplikácia je naprogramovaná v programovacom
+jazyku Go.
 
 Študentov cvičením sprevádza vopred vygenerovaný samorozbaľovací skript. Cvičenie
 je rozdelené do takzvaných levelov. Každý level začína vypísaním zadania priamo do
 terminálu. Následne je používateľ vyzvaný napísať príkaz v termináli. Ak príkaz
-vráti správny výstup, skript pošle používateľa do ďalšieho levelu. Týmto štýlom
+vráti správny výstup, skript pošle používateľa do ďalšieho levelu. Vďaka tomu
 študent nemusí prepínať medzi zadaním a terminálom, a taktiež má priamo overenú
-správnosť výstupu príkazu.
+správnosť výstupu príkazu. Niektoré levely majú viac alternatív, kde každá
+má jemne pozmenené zadanie. Študenti riešia iba jednu alternatívu každého z levelov.
 
 Skript počas práce študenta zachytáva všetky príkazy a zapisuje ich do textového
 dokumentu spoločne s časom vykonania. Ten po cvičení odošlú a prednášajúci ich vie
 obodovať.
 
-\section{Motivácia}
-\label{sec:motivacia}
+\subsection{Kurz Linux pre používateľov}
+\label{sec:motivacia:linuxforusers}
+
+Kurz Linux pre používateľov je úvodom do operačného systému Linux
+na používateľskej úrovni. Študenti sa učia pracovať v termináli so základnými
+príkazmi. Vytvárajú priečinky, vyhľadávajú a prepisujú určité úseky v texte,
+počítajú rôzne štatistické údaje z dát a podobne.
+
+Do akademického roku 2015/2016 študenti na cvičeniach vytvárali príkazy v
+termináli, a keď si boli istí, že fungujú, tak ich skopírovali a poslali na obodovanie.
+Neskôr, od roku 2016/2017 vznikol projekt go-term-adventures (\ref{sec:motivacia:gta}), vďaka ktorému sa
+cvičenia stali viac interkatívnejšími a zefektívnili prácu na nich.
 
 V akademickom roku 2016/2017 si kurz Linux pre používateľov na FMFI UK zapísalo
 90 študentov. Na cvičeniach sa väčšinou snažilo pomáhať 6 cvičiacich. Študenti riešili
@@ -63,37 +95,37 @@ Riešenia úloh študenti posielali ako textový súbor so zoznamom príkazov do
 Moodle a hodnotiaci si ich vždy musel sťahovať aby videl obsah. Človek je
 tvor zábudlivý, čo sa potvrdilo aj na tomto kurze. Mnohokrát sa stalo, že študent
 zabudol odovzdať tento textový súbor, a tým pádom mu hodnotiaci nemohol prideliť
-body za dané cvičenie, čo prinieslo kopu problémov nielen študentovi, ale aj
+body za dané cvičenie, čo prinieslo mnoho problémov nielen študentovi, ale aj
 prednášajúcemu.
 
 Pre naše potreby neexistuje žiadny monitorovací systém, ktorý by spracovával
-dáta nášho typu a zároveň ich vizualizoval v reálnom čase podľa potrieb. 
+dáta nášho typu a zároveň ich vizualizoval v reálnom čase. 
 Preto sme sa rozhodli naprogramovať aplikáciu, ktorá bude
-monitorovať priebeh cvičenia a cvičiacim tak poskytne prehľad o riešeniach študentov.
+monitorovať priebeh cvičenia, a vyučujúcim tak poskytne prehľad nielen o riešeniach
+študentov ale aj administrátorské webové rozhranie na správu cvičení.
 
 \section{Požiadavky na aplikáciu}
 \label{sec:apprequirements}
 
-V nasledujúcich bodoch zhrnieme požiadavky na našu aplikáciu
+V nasledujúcich bodoch zhrnieme požiadavky na našu aplikáciu:
 
 \begin{itemize}
-	\item Zbieranie dát z GTA aplikácie od každého jedného študenta
+	\item Zbieranie dát z GTA aplikácie od všetkých študentov
 	\item Ukladanie dát do databázy
-	\item Zobrazovanie priebehu cvičenia všetkým klientom v reálnom čase
+	\item Zobrazovanie priebehu cvičenia všetkým klientom (vyučujúcim) v reálnom čase
 	\item Prehľad historických cvičení
-	\item Možnosť obodovať jednotlivé riešenia a exportovať body do csv súboru
+	\item Automatické obodovanie jednotlivých riešení a exportovanie bodov do csv súboru
 	\item Detekcia neaktivity študentov
-	\item Detekcia príliš podobných riešení študentov
+	\item Detekcia rôznych spôsobov riešenia úloh
 \end{itemize}
 
 Nižšie sa pozrieme naše požiadavky podrobnejšie.
 
-\subsection{Zbieranie dát z GTA aplikácie od každého jedného študenta}
+\subsection{Zbieranie dát z GTA aplikácie od všetkých študentov}
 \label{sec:apprequirements:gtadata}
 
 Aby sme mohli monitorovať aktuálny stav študentov, potrebujeme mať záznam o
 všetkých akciách, ktoré študenti vykonali v termináli počas cvičenia.
-Dáta budú posielané požiadavkami typu POST v široko používanom JSON formáte.
 
 Každá z požiadaviek bude obsahovať základné informácie o počítači, na ktorom
 študent pracuje spolu s dátumom a časom odoslania, typom požiadavky a číslom cvičenia.
@@ -103,101 +135,21 @@ riešiť cvičenie v škole.
 Tým pádom vieme jednoznačne priradiť študenta k počítaču, čo nám pomôže pri
 vizualizácii miestnosti.
 
-\begin{lstlisting}
-{
-    "type": "typ poziadavky",
-    "user": "$USER",
-    "hostname": "`hostname`",
-    "ip": "lokalna ip pocitaca",
-    "exercise_number": cislo cvicenia,
-    "date": "datum a cas"
-}
-\end{lstlisting}
 
-Špecifikujme ďalej typy POST požiadaviek:
-
-\subsubsection{Typ start}
-\label{sec:apprequirements:gtadata:start}
-
-Keď študent spustí GTA skript.
-Systém si poznačí študenta, ktorý začína riešiť cvičenie.
-
-\begin{lstlisting}
-{
-    "type": "start",
-    "user": "$USER",
-    "hostname": "`hostname`",
-    "ip": "lokalna ip pocitaca",
-    "exercise_number": cislo cvicenia,
-    "date": "datum a cas"
-}
-\end{lstlisting}
-
-\subsubsection{Typ command}
-\label{sec:apprequirements:gtadata:command}
-
-Keď študent napíše v temináli príkaz a stlačí enter.
-Položka \textit{level} označuje level, v ktorom sa študent nachádza. Položka
-\textit{command} označuje odoslaný príkaz.
-
-\begin{lstlisting}
-{
-    "type": "command",
-    "user": "$USER",
-    "hostname": "`hostname`",
-    "ip": "local computer ip",
-    "exercise_number": cislo cvicenia,
-    "date": "datum a cas",
-    "level": cislo levelu,
-    "command": "prikaz z terminalu",
-}
-\end{lstlisting}
-
-\subsubsection{Typ passed}
-\label{sec:apprequirements:gtadata:passed}
-
-Keď študent prejde level. Takisto chceme mať záznam o tom, akým príkazom sa mu podarilo
-prejsť daný level.
-
-\begin{lstlisting}
-{
-    "type": "passed",
-    "user": "$USER",
-    "hostname": "`hostname`",
-    "ip": "local computer ip",
-    "exercise_number": cislo cvicenia,
-    "date": "datum a cas",
-    "level": cislo levelu,
-    "command": "prikaz z terminalu",
-}
-\end{lstlisting}
-
-\subsubsection{Typ exit}
-\label{sec:apprequirements:gtadata:exit}
-
-Keď študent ukončí cvičenie napísaním \textit{exit} v termináli.
-Systém si poznačí, že daný študent skončil a môže zaradiť jeho riešenie
-na ohodnotenie.
-
-\begin{lstlisting}
-{
-    "type": "exit",
-    "user": "$USER",
-    "hostname": "`hostname`",
-    "ip": "lokalna ip pocitaca",
-    "exercise_number": cislo cvicenia,
-    "date": "datum a cas"
-}
-\end{lstlisting}
-
-\subsection{Zobrazovanie priebehu cvičenia všetkým klientom v reálnom čase}
+\subsection{Zobrazovanie priebehu cvičenia všetkým klientom (vyučujúcim) v reálnom čase}
 \label{sec:apprequirements:visualization}
 
 Cvičiacim chceme priniesť prehľad o aktuálnom stave všetkých študentov riešiacich
 cvičenie. Preto je potrebná pekná vizualizácia v reálnom čase.
 Nechceme, aby si museli inštalovať nejaký softvér, preto bude najlepšie využiť webový prehliadač, ktorý je v dnešnej dobe dostupný aj na tabletoch a smartfónoch.
+Zobrazovať chceme hlavne jednoznačný identifikátor študentov a počítačov, na ktorých
+pracujú, level, v ktorom
+sa aktuálne nachádzajú, čas od posledného príkazu, neaktivitu po dlhšej dobe,
+a taktiež počet pokusov pri prechádzaní aktuálneho levelu. Bude sa dať pozrieť
+aj detail o študentovi, kde zobrazíme čas začiatku, konca a všetky príkazy, ktoré
+napísal na cvičení.
 
-Zároveň pre lepšiu orientáciu cvičiacich v miestnosti ponúkneme možnosť
+Zároveň pre lepšiu orientáciu vyučujúcich v miestnosti ponúkneme možnosť
 preusporiadania počítačov v tejto vizualizácii, ktorú si systém zapamätá a
 na ďalšom cvičení bude schopný zrekonštruovať toto rozostavenie počítačov v učebni.
 
@@ -209,29 +161,34 @@ sa vyjadrilo, že niektoré úlohy boli náročné a namiesto jednej vyučovacej
 strávili na cvičení dve až tri.
 Je dôležité, aby si tvorcovia jednotlivých úloh na cvičenie vedeli spätne pozrieť
 ich náročnosť a poprípade v budúcnosti upraviť zadanie.
+Zaujímavé dáta, ktoré chceme o každom študentovi zobraziť sú čas strávený riešením cvičenia a počet príkazov. Ďalej sú to priemery časov riešenia všetkých študentov,
+počtu príkazov, a následne grafy, ako sa zmenila obtiažnosť cvičenia oproti ostatným.
 
-\subsection{Možnosť obodovať jednotlivé riešenia a exportovať body do csv súboru}
+
+\subsection{Automatické obodovanie jednotlivých riešení a exportovanie bodov do csv súboru}
 \label{sec:apprequirements:export}
 
 Kurz prebieha v e-learningovom systéme Moodle. Každý študent si tam vie prezerať
-svoje body za cvičenia, testy a podobne. Systém Moodle akceptuje aj takzvaný
+svoje body za cvičenia, testy, nájde tam prednášky a iné materiály. Systém Moodle akceptuje aj takzvaný
 csv súbor hodnotenia, ktorý prednášajúci nahrá a body budú automaticky pridelené
-študentom. Preto chceme, aby náš systém vedel poskytnúť rozhranie pre obodovanie
-jednotlivých úloh, a ich následný export v csv formáte.
+študentom. Preto chceme, aby náš systém vedel poskytnúť rozhranie pre automatické
+obodovanie jednotlivých úloh a ich následný export v csv formáte.
 
 \subsection{Detekcia neaktivity študentov}
 \label{sec:apprequirements:noactivity}
 
 Študenti sa niekedy zaseknú na úlohe a nevedia ako riešiť daný problém, poprípade
-majú problém pochopiť zadanie. Náš systém bude detekovať neaktívnych študentov, ktorí
-nevykonali žiadnu akciu po dobu $n$ minút. Systém následne upozorní cvičiacich o tejto
-skutočnosti a tí môžu pomôcť študentom
+majú problém pochopiť zadanie. Náš systém bude detegovať neaktívnych študentov, ktorí
+nevykonali žiadnu akciu po dobu $n$ minút. Systém následne upozorní vyučujúcich o tejto
+skutočnosti a tí môžu pomôcť študentom.
+Taktiež bude upozorňovať vyučujúcich pokiaľ sa študentovi nepodarí prejsť level
+po určitom počte príkazov.
 
-\subsection{Detekcia príliš podobných riešení študentov}
+\subsection{Detekcia rôznych spôsobov riešenia úloh}
 \label{sec:apprequirements:similarsolutions}
 
-Viackrát sa po skončení cvičenia pri hodnotení úloh zistilo, že niektorí študenti
-riešili úlohu skupinovo, iní skopírovali celé riešenia od kolegov, iný zas iba časť
-riešenia. Takisto ako v predchádzajúcom bode bude systém porovnávať riešenie úlohy
-študenta s ostatnými a pokiaľ bude podobnosť príliš veľká, tak bude upozorňovať
-cvičiacich na túto skutočnosť.
+Veľa z úloh, ktoré sa vyskutujú na cvičeniach má viacero spôsobov riešenia. Vo väčšine
+prípadov aj študenti nerozmýšľajú úplne rovnako pri riešení. Preto chceme vyučujúcemu
+poskytnúť cennú spätnú väzbu o týchto spôsoboch riešení. Získa tak prehľad
+o tom, či študenti porozumeli prednáške a v budúcnosti sa môže zamerať na zlepšení
+výkladu učiva, poprípade sa viac sústrediť na to, čo študentom nešlo.

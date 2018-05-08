@@ -4,6 +4,12 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{enumitem}
+\usepackage{makecell}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage{rotating}
 \usepackage{listings,xcolor}
 \usepackage[hidelinks,breaklinks]{hyperref}
 \usepackage[slovak]{babel} % vypnite pre prace v anglictine
@@ -27,7 +33,74 @@
 %aj cislo odboru je povinne a je podla studijneho odboru autora prace
 \def\mfodbor{2508 Informatika} 
 \def\program{Informatika}
-\def\mfpracovisko{ Katedra informatiky }
+\def\mfpracovisko{Katedra aplikovanej informatiky}
+
+\colorlet{punct}{red!60!black}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+	basicstyle=\normalfont\ttfamily,
+	numbers=left,
+	numberstyle=\scriptsize,
+	stepnumber=1,
+	numbersep=8pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	literate=
+	*{0}{{{\color{numb}0}}}{1}
+	{1}{{{\color{numb}1}}}{1}
+	{2}{{{\color{numb}2}}}{1}
+	{3}{{{\color{numb}3}}}{1}
+	{4}{{{\color{numb}4}}}{1}
+	{5}{{{\color{numb}5}}}{1}
+	{6}{{{\color{numb}6}}}{1}
+	{7}{{{\color{numb}7}}}{1}
+	{8}{{{\color{numb}8}}}{1}
+	{9}{{{\color{numb}9}}}{1}
+	{:}{{{\color{punct}{:}}}}{1}
+	{,}{{{\color{punct}{,}}}}{1}
+	{"}{{{\color{delim}{"}}}}{1}
+	{\{}{{{\color{delim}{\{}}}}{1}
+	{\}}{{{\color{delim}{\}}}}}{1}
+	{[}{{{\color{delim}{[}}}}{1}
+	{]}{{{\color{delim}{]}}}}{1},
+}
+
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, for},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]",
+	aboveskip=12pt,
+}
+
+\lstset{
+	language=JavaScript,
+	extendedchars=true,
+	basicstyle=\small\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	frame=single,
+	tabsize=2,
+	breaklines=true,
+	showtabs=true,
+	captionpos=b
+}
+
+\theoremstyle{definition}
+\newtheorem*{prikl}{Príklad}
+
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \begin{document}     
 \frontmatter
@@ -123,9 +196,11 @@ Fakulta matematiky, fyziky a informatiky
 ~
 
 \vfill
-{\bf Poďakovanie:} Tu môžete poďakovať školiteľovi, prípadne
-ďalším osobám, ktoré vám s prácou nejako pomohli, poradili,
-poskytli dáta a podobne.
+{\bf Poďakovanie:} Chcel by som sa poďakovať môjmu školiteľovi
+RNDr. Marekovi Nagyovi, PhD. za poskytnuté konzultácie, cenné rady a možnosť
+testovať systém na cvičeniach. Vďaka patrí Marekovi Šuppovi za mnoho nápadov, ochotu
+diskutovať o vylepšeniach systému a pomoc s odosielaním dát z GTA aplikácie.
+Ďakujem aj mojej rodine a kamarátom, ktorí ma podporovali počas štúdia.
 
 % --- Koniec poďakovania
 
@@ -141,7 +216,7 @@ stručne sumarizuje výsledky práce. Mal by byť pochopiteľný pre bežného
 informatika. Nemal by teda využívať skratky, termíny alebo označenie
 zavedené v práci, okrem tých, ktoré sú všeobecne známe.
 
-\paragraph*{Kľúčové slová:} jedno, druhé, tretie (prípadne štvrté, piate)
+\paragraph*{Kľúčové slová:} monitorovanie študentov, Node.js, K-means
 % --- Koniec Abstrakt - Slovensky
 
 
@@ -158,23 +233,6 @@ Slovak language).
 \paragraph*{Keywords:} 
 
 % --- Koniec Abstrakt - Anglicky
-
-% -------------------
-% --- Predhovor - v informatike sa zvacsa nepouziva
-% -------------------
-%\newpage 
-%\thispagestyle{empty}
-%
-%\huge{Predhovor}
-%\normalsize
-%\newline
-%Predhovor je všeobecná informácia o práci, obsahuje hlavnú charakteristiku práce 
-%a okolnosti jej vzniku. Autor zdôvodní výber témy, stručne informuje o cieľoch 
-%a význame práce, spomenie domáci a zahraničný kontext, komu je práca určená, 
-%použité metódy, stav poznania; autor stručne charakterizuje svoj prístup a svoje 
-%hľadisko. 
-%
-% --- Koniec Predhovor
 
 
 % -------------------
@@ -205,11 +263,11 @@ Slovak language).
 
 \input specifikacia.tex
 
-\input navrhtechnologie.tex
+\input navrh.tex
+
+\input implementacia.tex
 
 \input testovanie.tex
-
-\input dokumentacia.tex
 
 \input zaver.tex
 
@@ -229,21 +287,6 @@ Slovak language).
 \bibliographystyle{plain}
 \bibliography{literatura} 
 
-%Prípadne môžete napísať literatúru priamo tu
-%\begin{thebibliography}{5}
- 
-%\bibitem{br1} MOLINA H. G. - ULLMAN J. D. - WIDOM J., 2002, Database Systems, Upper Saddle River : Prentice-Hall, 2002, 1119 s., Pearson International edition, 0-13-098043-9
-
-%\bibitem{br2} MOLINA H. G. - ULLMAN J. D. - WIDOM J., 2000 , Databasse System implementation, New Jersey : Prentice-Hall, 2000, 653s., ???
-
-%\bibitem{br3} ULLMAN J. D. - WIDOM J., 1997, A First Course in Database Systems, New Jersey : Prentice-Hall, 1997, 470s., 
-
-%\bibitem{br4} PREFUSE, 2007, The Prefuse visualization toolkit,  [online] Dostupné na internete: <http://prefuse.org/>
-
-%\bibitem{br5} PREFUSE Forum, Sourceforge - Prefuse Forum,  [online] Dostupné na internete: <http://sourceforge.net/projects/prefuse/>
-
-%\end{thebibliography}
-
 %---koniec Referencii
 
 % -------------------
@@ -253,16 +296,10 @@ Slovak language).
 %Nepovinná časť prílohy obsahuje materiály, ktoré neboli zaradené priamo  do textu. Každá príloha sa začína na novej strane.
 %Zoznam príloh je súčasťou obsahu.
 %
-%\addcontentsline{toc}{chapter}{Appendix A}
-%\input AppendixA.tex
+\addcontentsline{toc}{chapter}{Appendix A}
+\input AppendixA.tex
 %
 %\addcontentsline{toc}{chapter}{Appendix B}
 %\input AppendixB.tex
 
 \end{document}
-
-
-
-
-
-
