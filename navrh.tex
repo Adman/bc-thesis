@@ -16,7 +16,7 @@ pri implementácii.
 Obrázok \ref{img:architekturadata} ilustruje tok dát. Každý študent v učebni pracuje
 na počítačí v Linuxovom termináli. V ňom beží aplikácia GTA, ktorá odosiela dáta
 priamo na server šifrované pomocou TLS. Ten ich spracuje, patrične uloží do databázi
-a v okamžite pošle vyučujúcim, kde sa zobrazia vo webovom rozhraní.
+a okamžite pošle vyučujúcim, kde sa zobrazia vo webovom rozhraní.
 
 Vyučujúci môžu napríklad vytvárať nové inštancie cvičenia, hodnotiť riešenia študentov.
 Dáta v tomto prípade posielame POST požiadavkami na server. Spojenie medzi klientom
@@ -106,7 +106,7 @@ Keď študent spustí GTA skript, systém si poznačí študenta, ktorý začín
     "user": "$USER",
     "hostname": "`hostname`",
     "ip": "ip pocitaca",
-    "exercise_number": cislo cvicenia,
+    "exercise_number": "ID cvicenia",
     "date": "datum a cas"
 }
 \end{lstlisting}
@@ -237,7 +237,7 @@ o niekoľko z nich. Nižšie si uvedieme podrobnejšie informácie o týchto mod
 
 Express.js je jeden z najpoužívanejších frameworkov pre Node.js. Jeho flexibilnosť
 a minimalizmus ponúkajú pohodlhný a rýchly vývoj webových aplikácií.
-Veľa vylepšení je dostupných v podobe pluginov, ktoré si môžme nainštalovať z NPM
+Veľa vylepšení je dostupných v podobe pluginov, ktoré si môžeme nainštalovať z NPM
 databázy. My využijeme architektúru \textit{model-view-controller} (MVC). Najskôr príde
 požiadavka na server, ktorú obsluhuje \textit{controller}. Pri obsluhovaní
 interaguje s databázovým \textit{modelom}. Následne sa zavolá \textit{view}, ktorý 

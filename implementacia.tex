@@ -141,7 +141,7 @@ a spracúva všetky dáta.
 
 Na prácu s IP adresami sme použili knižnicu \textit{ip}. Pri inicializácii
 aplikácie sa pre každú povolenú sieť vytvorí inštancia
-\verb'ip.cidrSubnet("ip/maska")'. Vďaka nej môžme využiť metódu
+\verb'ip.cidrSubnet("ip/maska")'. Vďaka nej môžeme využiť metódu
 \verb'contains("ip")', ktorá zistí, či daná IP adresa patrí do siete.
 
 \begin{lstlisting}[language=JavaScript]
@@ -284,7 +284,7 @@ sme sa rozhodli použiť metódu strojového učenia \textit{K-means}.
 \label{sec:solutionclusterizing:kmeans}
 
 Najjednoduchšou formou zhlukovania je rozdeľovanie jednotlivých objektov do
-disjunktných podmnožín, tak že splnia špecifické kritériá. Každá z týchto množín je reprezentovaná takzvaným \textit{centroid}-om, ktorý je stredom celého zhluku.
+disjunktných podmnožín, tak že splnia špecifické kritériá. Každá z týchto množín je reprezentovaná takzvaným \textit{centroid}-om, ktorý je stredom (ťažiskom) celého zhluku.
 Najrozšírenejšie kritérium je \textit{kritérium chyby clustera}, ktoré pre každý
 jeden objekt spočíta jeho štvorcovú vzdialenosť od centroidu a potom vezme
 súčet týchto vzdialeností pre celý cluster. Veľmi populárnou metódou, ktorá minimalizuje
@@ -296,8 +296,8 @@ reštartov.~\cite{bib:globalkmeans}
 Algoritmus funguje v štyroch základných krokoch:
 \begin{enumerate}
 	\item Voľba $k$ počiatočných centroidov
-	\item Každý vektor z množiny dát je priradený do clustera s najbližším stredom
-	\item Každý cluster si prepočíta nový centroid, ktorý sa stane novým stredom
+	\item Každý vektor z množiny dát je priradený do clustera s najbližším centroidom
+	\item Každý cluster si prepočíta nový centroid
 	\item Kroky 2 a 3 sa opakujú pokiaľ aspoň jeden vektor zmení cluster alebo
 		sa prekročí maximálny povolený počet iterácií
 \end{enumerate}
@@ -385,7 +385,7 @@ hodnoty $\vec{\alpha_i}=(a_1, \ldots, a_{|R|})$, pre ktoré platí:
 $$a_j=\begin{cases}1,&\textrm{ak sa slovo z }R\textrm{ na }j\textrm{-tej pozícii nachádza v }R_i,\\
 0,&\textrm{inak}\end{cases}$$
 
-Dostali sme teda vektorovú reprezentáciu jednotlivých riešení, ktoré môžme použiť
+Dostali sme teda vektorovú reprezentáciu jednotlivých riešení, ktoré môžeme použiť
 ako vstup do algoritmu \textit{K-means}.
 
 \subsection{Meranie vzdialenosti}
@@ -437,7 +437,7 @@ dvoma riešeniami.
 
 Pre lepšiu predstavivosť o vzdialenosti riešení, ktoré vstupujú do \textit{K-means}
 algoritmu potrebujeme vizualizovať jednotlivé vektory v 2D priestore. Jediným
-problémom je, že tieto vektory majú veľké dimenzie, ktoré nemôžme priamo priradiť
+problémom je, že tieto vektory majú veľké dimenzie, ktoré nemôžeme priamo priradiť
 na $[x,y]$ pozíciu.
 
 Rozhodli sme sa využiť algoritmus strojového učenia \textit{t-SNE} (t-distributed

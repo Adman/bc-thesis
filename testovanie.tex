@@ -131,7 +131,7 @@ dostalo do jedného z clusterov.
 \end{table}
 
 Poďme sa ďalej pozrieť na úlohu, kde bolo treba vypísať posledný stĺpec zo súboru
-\verb'/etc/passwd'.
+\verb'/etc/passwd'. Prvé dve riešenia sa dostali do rovnakého clustera.
 
 \begin{enumerate}[label={(\arabic*)}]
 	\item \verb'grep "[^:]*$" -o /etc/passwd > zoznam.txt'
@@ -163,10 +163,11 @@ Poďme sa ďalej pozrieť na úlohu, kde bolo treba vypísať posledný stĺpec 
 	\label{tab:distances2}
 \end{table}
 
-V tomto prípade si môžme všimnúť, že vzdialenosti unigramových reprezentácií
+V tomto prípade si môžeme všimnúť, že vzdialenosti unigramových reprezentácií
 (1) a (2) sú väčšie ako pri (1) a (3). My by sme však chceli, aby to bolo presne opačne
 a príkazy (1) a (2) boli k sebe bližšie ako (1) a (3). Nami navrhnuté špeciálne bigramy
 vyriešili tento problém, čo sa prejavilo aj na vzdialenostiach.
+Vo všeobecnosti však 
 
 Na obrázku~\ref{img:tsne} je ukážka zobrazenia riešení v 2D priestore pomocou
 t-SNE, ktoré boli rozdelené do troch clusterov.
