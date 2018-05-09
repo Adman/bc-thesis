@@ -37,8 +37,8 @@ správaní. Táto práca sa zaoberá monitorovacím systémom, ktorý sleduje ak
 \label{sec:textadventures}
 
 Textové adventúry sú jednými z najstarších typov počítačových hier, ktoré spadajú
-pod žáner dobrodružné. Používateľ využíva na interakciu v hre spravidla iba text,
-ktorý je vstupom, a hra následne odpovedá taktiež textovým výstupom.
+pod dobrodružný žáner. Používateľ využíva na interakciu v hre spravidla iba klávesnicu,
+a hra následne odpovedá textovým výstupom.
 Vstup je väčšinou zadávaný používateľom vo forme krátkych slovných spojení
 typu \glqq vziať kľúč\grqq~alebo \glqq choď vpred\grqq, ktoré sú spracovávané
 textovým parserom. Prvé parsery rozumeli iba dvojslovným spojeniam typu sloveso + podstatné meno. Neskôr boli vyvinuté také, ktoré už rozumeli celým vetám.
@@ -61,7 +61,7 @@ jazyku Go.
 
 Študentov cvičením sprevádza vopred vygenerovaný samorozbaľovací skript. Cvičenie
 je rozdelené do takzvaných levelov. Každý level začína vypísaním zadania priamo do
-terminálu. Následne je používateľ vyzvaný napísať príkaz v termináli. Ak príkaz
+terminálu. Následne je používateľ vyzvaný napísať príkaz v termináli. Ak zadaný príkaz
 vráti správny výstup, skript pošle používateľa do ďalšieho levelu. Vďaka tomu
 študent nemusí prepínať medzi zadaním a terminálom, a taktiež má priamo overenú
 správnosť výstupu príkazu. Niektoré levely majú viac alternatív, kde každá
@@ -82,14 +82,13 @@ počítajú rôzne štatistické údaje z dát a podobne.
 Do akademického roku 2015/2016 študenti na cvičeniach vytvárali príkazy v
 termináli, a keď si boli istí, že fungujú, tak ich skopírovali a poslali na obodovanie.
 Neskôr, od roku 2016/2017 vznikol projekt go-term-adventures (\ref{sec:motivacia:gta}), vďaka ktorému sa
-cvičenia stali viac interkatívnejšími a zefektívnili prácu na nich.
+cvičenia stali viac interaktívnejšími a aj práca na nich sa zefektívnila.
 
 V akademickom roku 2016/2017 si kurz Linux pre používateľov na FMFI UK zapísalo
 90 študentov. Na cvičeniach sa väčšinou snažilo pomáhať 6 cvičiacich. Študenti riešili
 úlohy a často sa stávalo, že potrebovali pomôcť a dlhšiu dobu sa neprihlásili.
 Pri tak veľkom počte študentov je ťažké zisťovať, kto sa zasekol na danej úlohe.
-Taktiež sa vyskytlo veľa problémov s príliš podobnými riešeniami a nemožnosť ich 
-riešiť priamo na cvičení komplikovalo hodnotenie.
+Taktiež sa vyskytlo veľa problémov s príliš podobnými riešeniami a nemožnosť riešiť podozrenie z opisovania priamo na cvičení, komplikovalo hodnotenie.
 
 Riešenia úloh študenti posielali ako textový súbor so zoznamom príkazov do systému
 Moodle a hodnotiaci si ich vždy musel sťahovať aby videl obsah. Človek je
@@ -98,7 +97,7 @@ zabudol odovzdať tento textový súbor, a tým pádom mu hodnotiaci nemohol pri
 body za dané cvičenie, čo prinieslo mnoho problémov nielen študentovi, ale aj
 prednášajúcemu.
 
-Pre naše potreby neexistuje žiadny monitorovací systém, ktorý by spracovával
+Pre naše potreby neexistoval žiadny monitorovací systém, ktorý by spracovával
 dáta nášho typu a zároveň ich vizualizoval v reálnom čase. 
 Preto sme sa rozhodli naprogramovať aplikáciu, ktorá bude
 monitorovať priebeh cvičenia, a vyučujúcim tak poskytne prehľad nielen o riešeniach
