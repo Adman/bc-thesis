@@ -2,24 +2,33 @@
 \addcontentsline{toc}{chapter}{Záver} % rucne pridanie do obsahu
 \markboth{Záver}{Záver} % vyriesenie hlaviciek
 
-V tejto práci sa nám podarilo úspešne implementovať systém, ktorý monitoruje priebeh
-cvičenia. Systém zbiera dáta od študentov riešiacich úlohy. Tieto dáta sú následne
-spracovávané 
+V tejto práci sa nám podarilo úspešne navrhnúť a implementovať systém, ktorý monitoruje
+priebeh cvičenia. Systém zbiera dáta od študentov riešiacich úlohy v termináli.
+Tieto dáta sú následne spracovávané a v reálnom čase zobrazované vyučujúcim.
+Popri zbieraní týchto dát systém automaticky detekuje kritické situácie ako napríklad
+zaseknutie študentov na niektorej z úloh alebo príliš veľkú neaktivitu. Vyučujúci
+sa tak môžu viac venovať týmto študentom. Taktiež sa nám podarilo naprogramovať
+rozhranie, v ktorom je možné hodnotiť riešenia študentov buď ručne alebo automaticky.
+Veľkým prínosom je aj možnosť zhlukovania podobných riešení pomocou metódy
+\textit{K-means}, ktorá nám poskytuje prehľad o rozmýsľaní študentov.
 
 Táto aplikácia prináša mnoho nápadov na prácu v budúcnosti. Počas semestra
 sme na každom cvičení zozbierali značné množstvo dát, ktoré by sa v budúcich rokoch
 dali využiť.
 Vzhľadom na tieto historické dáta by bolo dobré naučiť sa, koľko by daná úloha mala
-približne trvať (tak ako v počte pokusov tak aj časovo) a na základe toho spraviť
+približne trvať (tak ako v počte pokusov tak aj časovo) a na základe toho spraviť lepšiu
 heuristiku na detekciu zaseknutých študentov.
 Ďalej by nám tieto historické dáta mohli pomôcť zaradiť študentov do istých
 \glqq kategórii problémovosti\grqq~vzhľadom na prílišnú podobnosť riešení s ostatnými,
 či príliš veľkú dobu trvania riešenia cvičenia voči ostatným. Týmto študentom by sa
 potom mohli vyučujúci o to viac venovať, kedže sa historicky vie, že ich to dokáže
-posunúť dopredu.Ďalším zaujímavým vylepšením by bolo implementovať distribúciu cvičiacich
+posunúť dopredu. Ďalším zaujímavým vylepšením by bolo implementovať distribúciu cvičiacich
 k jednotlivým
 študentom. Každý cvičiaci by mal mobilné zariadenie, kam by systém posielal
-notifikácie. Systém by si taktiež vedel pamätať, ktorí cvičiaci už úspešne pomohli
-študentom a prednostne tých k nim posielal pri rovnakých úlohách.
+notifikácie. Aplikáciu by sme chceli rozšíriť aj na iné dómeny výuky
+(programovanie v pythone, C++, Scratchi...), čo by vyžadovalo pridanie odosielania
+dát z testovačov a jemnú modifikáciu nášho systému.
+
+
 
 
