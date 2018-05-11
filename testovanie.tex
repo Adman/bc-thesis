@@ -169,11 +169,11 @@ všimnúť, že vzdialenosti unigramových reprezentácií
 (1) a (2) sú väčšie ako pri (1) a (3). My by sme však chceli, aby to bolo presne opačne
 a príkazy (1) a (2) boli k sebe bližšie ako (1) a (3). Nami navrhnuté špeciálne bigramy
 vyriešili tento problém, čo sa prejavilo aj na vzdialenostiach.
-Vo všeobecnosti však nemusí platiť, že naše špeciálne bigramy sú vždy lepšie ako unigramy.
-Preto sme sa v aplikácii rozhodli ponechať obidve možnosti a používateľ sa môže
-rozhodnúť, ktorú použije. Taktiež, z výsledkov nie je úplne jasné, ktorá metrika
+Vo všeobecnosti však nemusí platiť, že naše špeciálne bigramy sú vždy lepšie ako unigramy. Taktiež, z výsledkov nie je úplne jasné, ktorá metrika
 je lepšia. Vidíme iba, že Jaccardova vzdialenosť udáva väčšinou o pár stotín
-väčšiu vzdialenosť.
+väčšiu vzdialenosť ako kosínusová.
+Preto sme sa v aplikácii rozhodli ponechať obidve možnosti reprezentácií vstupu a
+metrík a používateľ sa môže rozhodnúť, ktorú použije. 
 
 Na obrázku~\ref{img:tsne} je ukážka zobrazenia riešení v 2D priestore pomocou
 t-SNE, ktoré boli rozdelené do troch clusterov.
@@ -187,7 +187,7 @@ t-SNE, ktoré boli rozdelené do troch clusterov.
 	\vspace{\baselineskip}
 	
 	\centerline{\includegraphics[width=1\textwidth]{images/histogram2.png}}
-	\caption[Percentuálne zastúpenie úspešných a neúspešných pokusov o riešenie 2]{Percentuálne zastúpenie úspešných a neúspešných pokusov o riešenie v rámci každej z úloh (cvičenie č. 9)}
+	\caption[Percentuálne zastúpenie úspešných a neúspešných pokusov o riešenie]{Percentuálne zastúpenie úspešných a neúspešných pokusov o riešenie v rámci každej z úloh (cvičenie č. 9)}
 	\label{img:histogram2}
 \end{figure}
 
