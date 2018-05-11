@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage{subfig}
 \usepackage{url}
 \usepackage{enumitem}
 \usepackage{makecell}
@@ -101,6 +102,7 @@
 \newtheorem*{prikl}{Príklad}
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\renewcommand{\thesubfigure}{\arabic{subfigure}}
 
 \begin{document}     
 \frontmatter

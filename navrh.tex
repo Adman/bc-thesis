@@ -1,7 +1,7 @@
 \chapter{Návrh aplikácie}
 \label{kap:navrh}
 
-V tejto kapitole uvedieme informácie o návrhu aplikácie a použitých nástrojov
+V tejto kapitole uvedieme informácie o návrhu aplikácie a použitých nástrojoch
 pri implementácii.
 
 \section{Architektúra toku dát}
@@ -15,7 +15,7 @@ pri implementácii.
 
 Obrázok \ref{img:architekturadata} ilustruje tok dát. Každý študent v učebni pracuje
 na počítačí v Linuxovom termináli. V ňom beží aplikácia GTA, ktorá odosiela dáta
-priamo na server šifrované pomocou TLS. Ten ich spracuje, patrične uloží do databázi
+priamo na server šifrované pomocou TLS. Ten ich spracuje, patrične uloží v databáze
 a okamžite pošle vyučujúcim, kde sa zobrazia vo webovom rozhraní.
 
 Vyučujúci môžu napríklad vytvárať nové inštancie cvičenia, hodnotiť riešenia študentov.
@@ -42,7 +42,7 @@ GTA sa často vyskytuje aj viacero alternatív jedného levelu. Preto položka
 \textit{level} môže obsahovať regulárny výraz, ktorý bude vzorom pre viacero
 levelov.
 
-Všetkým vyučujúcim, sa uloží vytvorený účet do tabuľky \textit{User}.
+Všetkým vyučujúcim sa uloží vytvorený účet do tabuľky \textit{User}.
 Heslo sa ukladá do stĺpca \textit{password}. Aby sme skryli heslo pred útočníkom,
 je zahešované funkciou \textit{bcrypt} pred uložením do databázy.
 
@@ -114,7 +114,7 @@ Keď študent spustí GTA skript, systém si poznačí študenta, ktorý začín
 \subsubsection{Typ \textit{command}}
 \label{sec:zbieraniedat:gtadata:command}
 
-Keď študent napíše v temináli príkaz a stlačí enter, odošleme informáciu o príkaze.
+Keď študent napíše v termináli príkaz a stlačí enter, odošleme informáciu o príkaze.
 Položka \textit{level} označuje level, v ktorom sa študent nachádza. Položka
 \textit{command} označuje odoslaný príkaz.
 
@@ -187,14 +187,14 @@ o pomoc v jednotlivých leveloch.
     "ip": "ip pocitaca",
     "exercise_number": "ID cvicenia",
     "date": "datum a cas",
-    "level": "ID cvicenia"
+    "level": "ID levelu"
 }
 \end{lstlisting}
 
 \subsubsection{Typ \textit{ack}}
 \label{sec:zbieraniedat:ack}
 
-Po úspešnej pomoci študentovi vyučujúcim alebo študent odošle túto informáciu
+Po úspešnej pomoci študentovi odošle vyučujúci alebo študent túto informáciu
 do našej aplikácie a vytvorí sa záznam v databáze.
 
 \begin{lstlisting}[language=json,firstnumber=1]
@@ -212,7 +212,7 @@ do našej aplikácie a vytvorí sa záznam v databáze.
 \section{Node.js}
 \label{sec:nodejs}
 
-Node.js je multiplataformový open-source softvér, ktorý spúšťa JavaScriptový
+Node.js je multiplatformový open-source softvér, ktorý spúšťa JavaScriptový
 kód na strane servera. Je primárne určený na programovanie webových serverov.
 Historicky sa JavaScript používal ako skriptovací jazyk
 na strane klienta, kde tento skript bol vložený v HTML stránke a prehliadač ho vedel
@@ -297,6 +297,7 @@ klienta.~\cite{bib:raisocketio,bib:walshwebsocket}
 V našej aplikácii potrebujeme autentizovať užívateľov. Prístup do webového
 rozhrania aplikácie môže mať len vyučujúci. Passport.js je vhodným modulom
 do Node.js aplikácii dobre integrovateľný s Express.js frameworkom.
-Podporuje viacerov metód autentizácie, napríklad aj OAuth2, Auth0...
+Podporuje viacero metód autentizácie, napríklad aj OAuth2, Auth0...
 My pre jednoduchosť využijeme štandardný prístup pomocou mena a hesla.
-Kvalitná dokumentácia~\cite{bib:passportjsdocs} nám pomohla pri implementácii.
+Kvalitná dokumentácia~\cite{bib:passportjsdocs} tohto modulu nám pomohla pri
+implementácii.

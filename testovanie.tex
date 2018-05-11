@@ -99,7 +99,8 @@ výberu počiatočných centroidov.
 
 Nižšie uvádzame príklady troch správnych riešení úlohy, v ktorej mali študenti v súbore 
 nájsť definíciu funkcie, v ktorej sa nachádza slovo \textit{page}. Každé z riešení sa
-dostalo do jedného z clusterov.
+dostalo do jedného z clusterov. V tabuľke~\ref{tab:distances} môžme vidieť vzdialenosti
+medzi jednotlivými riešeniami.
 \begin{enumerate}[label=(\alph*)]
 	\item \verb'grep -n -i "def.*page[a-z^(]" test_cases.py > funkcia.txt'
 	\item \verb'grep -n "def" test_cases.py | grep "page.*(" > funkcia.txt'
@@ -126,7 +127,7 @@ dostalo do jedného z clusterov.
 		Špec. bigramy (b), (c) & 0.5833333333333333 & 0.41074434901121050\\
 		\hline
 	\end{tabular}
-	\caption[xxx]{yyy}
+	\caption[Porovnanie vzdialeností reprezentácií vstupov (a), (b), (c)]{Porovnanie vzdialeností reprezentácií vstupov (a), (b), (c)}
 	\label{tab:distances}
 \end{table}
 
@@ -151,7 +152,7 @@ Poďme sa ďalej pozrieť na úlohu, kde bolo treba vypísať posledný stĺpec 
 		Unigramy (1), (3) & 0.25 & 0.1339745962155613\\
 		\hline
 		Unigramy (2), (3) & 0.4444444444444444 & 0.2783121635129677\\
-		\Xhline{2pt}
+		\Xhline{1.5pt}
 		Špec. bigramy (1), (2) & 0.2857142857142857 & 0.16666666666666652\\
 		\hline
 		Špec. bigramy (1), (3) & 0.5 & 0.3195861825602282\\
@@ -159,15 +160,20 @@ Poďme sa ďalej pozrieť na úlohu, kde bolo treba vypísať posledný stĺpec 
 		Špec. bigramy (2), (3) & 0.6363636363636364 & 0.45566894604818264\\
 		\hline
 	\end{tabular}
-	\caption[xxx]{yyy}
+	\caption[Porovnanie vzdialeností reprezentácií vstupov (1), (2), (3)]{Porovnanie vzdialeností reprezentácií vstupov (1), (2), (3)}
 	\label{tab:distances2}
 \end{table}
 
-V tomto prípade si môžeme všimnúť, že vzdialenosti unigramových reprezentácií
+V tomto prípade si môžeme v tabuľke~\ref{tab:distances2}
+všimnúť, že vzdialenosti unigramových reprezentácií
 (1) a (2) sú väčšie ako pri (1) a (3). My by sme však chceli, aby to bolo presne opačne
 a príkazy (1) a (2) boli k sebe bližšie ako (1) a (3). Nami navrhnuté špeciálne bigramy
 vyriešili tento problém, čo sa prejavilo aj na vzdialenostiach.
-Vo všeobecnosti však 
+Vo všeobecnosti však nemusí platiť, že naše špeciálne bigramy sú vždy lepšie ako unigramy.
+Preto sme sa v aplikácii rozhodli ponechať obidve možnosti a používateľ sa môže
+rozhodnúť, ktorú použije. Taktiež, z výsledkov nie je úplne jasné, ktorá metrika
+je lepšia. Vidíme iba, že Jaccardova vzdialenosť udáva väčšinou o pár stotín
+väčšiu vzdialenosť.
 
 Na obrázku~\ref{img:tsne} je ukážka zobrazenia riešení v 2D priestore pomocou
 t-SNE, ktoré boli rozdelené do troch clusterov.

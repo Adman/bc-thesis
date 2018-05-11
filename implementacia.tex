@@ -8,12 +8,12 @@ V tejto kapitole uvedieme dôležité a zaujímavé časti z kódu aplikácie.
 
 Prihlasovanie do systému je riešené klasicky pomocou mena a hesla. Potrebovali sme
 zabezpečiť aby si účet vedeli vytvoriť iba vyučujúci. Spravili sme teda script, ktorý
-vie spustiť administrátor aplikácie z terminálu. Ten si posputpne pýta základné údaje,
+vie spustiť administrátor aplikácie z terminálu. Ten si postupne pýta základné údaje,
 ktoré sa po vyplnení uložia do databázy. Po prihláseni do webového rozhrania vie
 užívateľ vytvárať ďalšie účty.
 
 Pred ukladaním nového užívateľa do databázy je potrebné aby heslo bolo
-bezpečne zahašované.  Databázové modely definované pomocou knižnice
+bezpečne zahašované. Databázové modely definované pomocou knižnice
 \textit{Sequelize} podporujú takzvané hooky. Tie sú volané napríklad
 pred vytvorením záznamu v databáze, po vytvorení, pred/po aktualizovaní alebo
 mazaní dát... My využívame hook pred vytvorením, ktorý nahradí heslo do zahašovanej
@@ -77,11 +77,12 @@ ktoré odosiela GTA aplikácia.
       $SERVER/gta -O /dev/null
 \end{lstlisting}
 
-Pred samotným spracovaním sa kontroluje, či IP adresa
-obsiahnuta v položke \textbf{IP} (sekcia~\ref{sec:gtadataprocessing:ipfilter}).
-Následne sa kontroluje, či je v čase odoslania požiadavky niektoré z cvičení aktívne
-a zároveň má rovnaké \textit{id}. Ak sú všetky tieto podmienky splnené,
-dáta sa uložia do tabuľky \textit{Post}.
+Pred samotným spracovaním sa kontroluje, či je IP adresa
+obsiahnutá v položke \textbf{IP} povolená (sekcia~\ref{sec:gtadataprocessing:ipfilter}).
+Následne sa kontroluje, či je v čase odoslania požiadavky niektorá inštancia z
+cvičení aktívna
+a zároveň má rovnaké \textit{id} ako to v požiadavke. Ak sú všetky tieto podmienky
+ splnené, dáta sa uložia do tabuľky \textit{Post}. V opačnom prípade sa zahodia.
 
 Okamžite po uložení potrebujeme odoslať tieto dáta všetkým prihláseným vyučujúcim.
 To nám zabezpečí funkcia \verb'io.emit'. Výhodou používania Socket.io je, že si môžeme
@@ -118,17 +119,12 @@ niektorej z inštancií.
 
 \begin{lstlisting}[language=JavaScript]
 schedule.scheduleJob("* * * * *", check_state);
-\end{lstlisting}
-
-Pred spracovávaním dát z GTA aplikácie sa taktiež kontroluje, či existuje inštancia
-cvičenia, ktorá je v stave \textit{active} a či jej \textit{ID} je rovnaké
-ako to z požiadavky. Ak nie je splnená niektorá z týchto podmienok, dáta sa
-zahodia a ďalej nespracovávajú.
+\end{lstlisting} 
 
 \subsection{Filtrovanie požiadaviek}
 \label{sec:gtadataprocessing:ipfilter}
 
-Občas chce vyučujúci zabezpečiť, aby študenti boli nútení riešiť úlohy
+Občas chce vyučujúci zabezpečiť, aby boli študenti nútení riešiť úlohy
 iba z konkrétneho miesta (napríklad učebňa v škole). Každá požiadavka z GTA aplikácie
 nesie so sebou informáciu o IP adrese počítača. Na základe toho vieme určiť,
 z akej siete táto požiadavka prišla. Vyučujúci si môže nastaviť povolené siete,
@@ -143,6 +139,7 @@ Na prácu s IP adresami sme použili knižnicu \textit{ip}. Pri inicializácii
 aplikácie sa pre každú povolenú sieť vytvorí inštancia
 \verb'ip.cidrSubnet("ip/maska")'. Vďaka nej môžeme využiť metódu
 \verb'contains("ip")', ktorá zistí, či daná IP adresa patrí do siete.
+Nasledujúca ukážka demonštruje logiku kontroly IP adries.
 
 \begin{lstlisting}[language=JavaScript]
 function is_ip_allowed(ip)
@@ -162,7 +159,7 @@ function is_ip_allowed(ip)
 \label{sec:vizualization}
 
 Vyučujúcemu potrebujeme zobrazovať o každom študentovi iba najdôležitejšie informácie.
-Preto sme si zvolili prehľadú \glqq krabičku\grqq ~(obrázok~\ref{img:userbox}).
+Preto sme si zvolili prehľadnú \glqq krabičku\grqq ~(obrázok~\ref{img:userbox}).
 V prvom riadku zobrazujeme používateľské meno študenta a pre lepšiu orientáciu
 v učebni aj takzvaný \textit{hostname}, ktorý určuje meno počítača, na ktorom
 študent pracuje. V pravom hornom rohu je zobrazený aktuálny názov úlohy, ktorú študent
@@ -185,7 +182,7 @@ periodicky každých päť sekúnd spúšťa funkcia, ktorá každému študento
 
 \begin{figure}[h]
 	\centerline{\includegraphics[width=0.7\textwidth]{images/gta_monitor_box.png}}
-	\caption[Vizualizácia pokroku študenta na cvičení]{Vizualizácia pokroku študenta na cvičení}
+	\caption[Vizualizácia pokroku študenta na cvičení]{Vizualizácia pokroku študenta na cvičení.}
 	\label{img:userbox}
 \end{figure}
 
@@ -193,12 +190,12 @@ Nižšie, v riadku s čiernym pozadím, sa nachádza posledný príkaz, ktorým 
 snaží vyriešiť úlohu. V prípade neúspešného riešenia môže vyučujúci nahliadnuť na
 tento príkaz, zistiť kde robí študent chybu, ísť k nemu osobne a poradiť. Úplne
 naspodu je ukazovateľ pokroku (progress bar), ktorý zobrazuje koľko úloh chýba
-študentovi vyriešiť do úspešného konca Jeho dĺžka sa počíta z dopredu nastavenej
+študentovi vyriešiť do úspešného konca. Jeho dĺžka sa počíta z vopred nastavenej
 koncovej úlohy.
 
 Takáto jednoduchá vizualizácia nám dáva iba čiastočný prehľad s najdôležitejšími
 informáciami, ktoré pomáhajú vyučujúcemu v lepšej a rýchlejšej orientácii medzi
-študentami. O každom študentovi máme zaznamenanú aktivitu počas celého cvičenia.
+študentmi. O každom študentovi máme zaznamenanú aktivitu počas celého cvičenia.
 Kliknutím na \glqq krabičku\grqq ~sa zobrazí detailný pohľad priebehu cvičenia
 konkrétneho študenta.
 
@@ -258,12 +255,12 @@ Výsledným vstupom do MD5 hašovacej funkcie je teda nasledujúci reťazec, kde
 \end{center}
 
 Tento nami vygenerovaný haš porovnáme s tým, ktorý vygenerovala aplikácia GTA.
-Ak sa rovnajú, študentovi pridelíme pripočítame množstvo bodov, ktoré prislúcha
-danej úlohe. Podľa toho, či je táto úloha nastavená ako bonus tieto boli pridelíme
+Ak sa rovnajú, študentovi pripočítame množstvo bodov, ktoré prislúcha
+danej úlohe. Podľa toho, či je táto úloha nastavená ako bonus tieto body pridelíme
 do stĺpca \textit{bonus} alebo \textit{score}.
 
 Takto ohodnotené riešenia je následne možné exportovať do csv súboru, ktorý je
-potom ľahko importovateľný do systému Moodle, kde študenti uvidia svoje hoodnotenie.
+potom ľahko importovateľný do systému Moodle, kde študenti uvidia svoje hodnotenie.
 
 \section{Detekcia rôznych spôsobov riešenia úloh}
 \label{sec:solutionclusterizing}
@@ -302,6 +299,21 @@ Algoritmus funguje v štyroch základných krokoch:
 		sa prekročí maximálny povolený počet iterácií
 \end{enumerate}
 
+\begin{figure}[h]
+	\begin{center}
+	    \subfloat[]{\includegraphics[width=0.23\textwidth]{images/kmeans_01.png}}
+		\quad
+		\subfloat[]{\includegraphics[width=0.23\textwidth]{images/kmeans_02.png}}
+		\quad
+		\subfloat[]{\includegraphics[width=0.23\textwidth]{images/kmeans_03.png}}
+		\quad
+		\subfloat[]{\includegraphics[width=0.23\textwidth]{images/kmeans_04.png}}
+	\end{center}
+	\caption[Vizualizácia fungovania K-means]{Vizualizácia fungovania K-means
+		(zdroj: wikipedia, Weston.pace, licencia \href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0})}
+	\label{img:kmeanssteps}
+\end{figure}
+
 Najviac používané metódy pri voľbe počiatočných $k$ centroidov sú \textit{Forgyho} a
 \textit{Random Partition}. Prvá spomínaná si z celej množiny dát vyberie $k$ náhodných
 vektorov, kde každý bude počiatočným centroidom a pokračuje krokom tri.
@@ -325,7 +337,8 @@ $$m_i^{(t+1)}=\frac{1}{|S_i^{(t)}|} \sum_{x_j\in S_i^{(t)}} x_j$$
 Na konci výpočtu dostaneme rozdelenie dát do clusterov. Je dobré vyskúšať rôzne hodnoty
 $k$ kvôli presnejšej klasifikácii.
 V tejto práci sme použili na klasifikáciu jednotlivých riešení
-knižnicu \textit{node-kmeans}, ktorá je stabilná a má dobrú podporu.
+knižnicu \textit{node-kmeans}, ktorá je stabilná a má dobrú podporu. Na inicializáciu
+centroidov využíva \textit{Forgyho} metódu.
 
 \subsection{Reprezentácia vstupu}
 \label{sec:solutionclusterizing:inputrepresentation}

@@ -10,7 +10,6 @@ Monitorovacie systémy sú neoddeliteľnou súčasťou pri vývoji a spravovaní
 komponentov hardvéru, softvéru, mechanických častí a podobne. Dávajú nám dôležité
 informácie o ich stave, vedia nás včas upozorňovať o potenciálnych hrozbách,
 zbierajú dáta, ktoré vieme vyhodnocovať a predísť podobným prípadom v budúcnosti.
-
 Priblížme si niektoré typy monitorovacích systémov.
 
 \textit{Sieťové} sledujú dostupnosť webových služieb, mailových serverov, využitie
@@ -19,7 +18,7 @@ diskového priestoru, oneskorenie odpovede alebo možný DDoS útok. Následne v
 
 \textit{Softvérové} zbierajú informácie o vyťažovaní procesorov, RAM pamäte, celkovom
 stave aplikácií. V unixových systémoch je na vizualizáciu týchto informácií využívaný
-program \textit{top} respektíve \textit{htop}.
+program \textit{top}, respektíve \textit{htop}.
 
 \textit{Hardvérové} sú využívané napríklad na sledovanie teploty zariadenia, funkčnosti rôznych mechanických častí, tlaku v nádržiach s kvapalinami atď. 
 
@@ -30,14 +29,13 @@ blížiacou sa prírodnou katastrofou.
 
 Všetky tieto systémy majú dôležité spoločné črty. Vedia zbierať dáta, spracovávať ich,
 vyhodnocovať, vizualizovať a informovať administrátorov a používateľov o neštandardnom
-správaní. Táto práca sa zaoberá monitorovacím systémom, ktorý sleduje aktivitu
-študentov na cvičení.
+správaní. My sa v tejto práci budeme venovať taktiež monitorovaciemu systému, ktorý ale sleduje aktivitu študentov na cvičení.
 
 \section{Textové adventúry}
 \label{sec:textadventures}
 
 Textové adventúry sú jednými z najstarších typov počítačových hier, ktoré spadajú
-pod dobrodružný žáner. Používateľ využíva na interakciu v hre spravidla iba klávesnicu,
+pod dobrodružný žáner. Používateľ využíva na interakciu v hre spravidla iba klávesnicu
 a hra následne odpovedá textovým výstupom.
 Vstup je väčšinou zadávaný používateľom vo forme krátkych slovných spojení
 typu \glqq vziať kľúč\grqq~alebo \glqq choď vpred\grqq, ktoré sú spracovávané
@@ -88,7 +86,7 @@ V akademickom roku 2016/2017 si kurz Linux pre používateľov na FMFI UK zapís
 90 študentov. Na cvičeniach sa väčšinou snažilo pomáhať 6 cvičiacich. Študenti riešili
 úlohy a často sa stávalo, že potrebovali pomôcť a dlhšiu dobu sa neprihlásili.
 Pri tak veľkom počte študentov je ťažké zisťovať, kto sa zasekol na danej úlohe.
-Taktiež sa vyskytlo veľa problémov s príliš podobnými riešeniami a nemožnosť riešiť podozrenie z opisovania priamo na cvičení, komplikovalo hodnotenie.
+Taktiež sa vyskytlo veľa problémov s príliš podobnými riešeniami a nemožnosť riešiť podozrenie z opisovania priamo na cvičení komplikovalo hodnotenie.
 
 Riešenia úloh študenti posielali ako textový súbor so zoznamom príkazov do systému
 Moodle a hodnotiaci si ich vždy musel sťahovať aby videl obsah. Človek je
@@ -186,8 +184,9 @@ po určitom počte príkazov.
 \subsection{Detekcia rôznych spôsobov riešenia úloh}
 \label{sec:apprequirements:similarsolutions}
 
-Veľa z úloh, ktoré sa vyskutujú na cvičeniach má viacero spôsobov riešenia. Vo väčšine
+Veľa z úloh, ktoré sa vyskytujú na cvičeniach má viacero spôsobov riešenia. Vo väčšine
 prípadov aj študenti nerozmýšľajú úplne rovnako pri riešení. Preto chceme vyučujúcemu
-poskytnúť cennú spätnú väzbu o týchto spôsoboch riešení. Získa tak prehľad
+poskytnúť cennú spätnú väzbu o týchto spôsoboch. Získa tak prehľad
 o tom, či študenti porozumeli prednáške a v budúcnosti sa môže zamerať na zlepšení
-výkladu učiva, poprípade sa viac sústrediť na to, čo študentom nešlo.
+výkladu učiva, poprípade sa viac sústrediť na to, čo študentom nešlo. Taktiež
+to môže byť použité pri podozrení na plagiarizmus.
