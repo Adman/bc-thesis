@@ -373,8 +373,9 @@ vybrať, ktorú reprezentáciu vstupu chce.
 množinu slov, v ktorej sa každé slovo bude nachádzať maximálne raz.
 $$\Big\{\verb'cat',~\verb'file.txt',~\verb'|',~\verb'grep',~\verb'^ab[0-9]+',~ \verb'-n',~\verb'-o',~\verb'[0-9]+',~\verb'>',~\verb'output.txt'\Big\}$$
 
-\noindent\textbf{Špeciálne bigramy:} Bigramy sú dvojice slov, ktoré sa v texte
-nachádzajú bezprostredne za sebou. V našom prípade sa môže stať, že rovnaký prepínač
+\noindent\textbf{Špeciálne bigramy:} Bigramy sú dvojice položiek, ktoré sa v texte
+nachádzajú bezprostredne za sebou. Môžu to byť fonémy, slabiky, písmená alebo slová.
+V našom prípade sa môže stať, že rovnaký prepínač
 je použitý v dvoch rôznych podpríkazoch, kde zastáva rozdielne funkcionality. 
 Preto sme sa rozhodli spraviť bigramy, kde prepínače a argumenty spojíme do dvojice
 s príkazom a operátory a samotné mená príkazov ostanú ako unigramy. Z hore uvedeného
