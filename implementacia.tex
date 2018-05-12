@@ -7,9 +7,9 @@ V tejto kapitole uvedieme dôležité a zaujímavé časti z kódu aplikácie.
 \label{sec:authentication}
 
 Prihlasovanie do systému je riešené klasicky pomocou mena a hesla. Potrebovali sme
-zabezpečiť aby si účet vedeli vytvoriť iba vyučujúci. Spravili sme teda script, ktorý
+zabezpečiť, aby si účet vedeli vytvoriť iba vyučujúci. Spravili sme teda script, ktorý
 vie spustiť administrátor aplikácie z terminálu. Ten si postupne pýta základné údaje,
-ktoré sa po vyplnení uložia do databázy. Po prihláseni do webového rozhrania vie
+ktoré sa po vyplnení uložia do databázy. Po prihlásení do webového rozhrania vie
 užívateľ vytvárať ďalšie účty.
 
 Pred ukladaním nového užívateľa do databázy je potrebné aby heslo bolo
@@ -30,14 +30,14 @@ User.beforeCreate(function(user, options) {
 });
 \end{lstlisting}
 
-Po každej akcii sa aktualizuje expirácia takzvaného \textit{session\_id} na 24 hodín
+Po každej akcii sa aktualizuje exspirácia takzvaného \textit{session\_id} na 24 hodín
 a uloží sa v databáze. Ten zabezpečuje, aby sa užívateľ mohol prihlásiť aj po
 reštartovaní servera, čo sme využili pri vývoji systému.
 
 \section{Spracovávanie dát z GTA aplikácie}
 \label{sec:gtadataprocessing}
 
-Dáta z GTA aplikácie prichádzaju POST požiadavkami na preddefinovaný
+Dáta z GTA aplikácie prichádzajú POST požiadavkami na preddefinovaný
 koncový bod \verb'/gta'.
 Keďže sme nechceli zahlcovať kompilovaný GTA program odosielaním
 týchto požiadaviek na server, potrebovali sme zvoliť alternatívu. Do úvahy prichádzali
@@ -56,7 +56,7 @@ server \textit{wget}-om.
 Dáta posielame vo formáte JSON. Znaky v položke \textit{command} sme kódovali
 pomocou funkcie \verb'urlencode', ktorá zabezpečovala, že znaky ako medzera nám
 nepokazila fungovanie odosielania. Niektoré UTF-8 znaky boli zle kódované, čo
-spôsobovalo chyby na strane severa pri spracovávaní dát funkciou \verb'JSON.parse'.
+spôsobovalo chyby na strane servera pri spracovávaní dát funkciou \verb'JSON.parse'.
 Preto sme sa rozhodli použiť kódovanie pomocou \verb'base64'.
 
 Aby server vedel jasne rozpoznať typ dát,
@@ -95,7 +95,7 @@ socketapi.io.emit('new_post', data);
 \end{lstlisting}
 
 Na strane klienta počúvame na túto udalosť a následne zavoláme obsluhovaciu
-funkciu, ktorá zabezpečí správne zobraznie v prehliadači.
+funkciu, ktorá zabezpečí správne zobrazenie v prehliadači.
 
 \begin{lstlisting}[language=JavaScript]
 socket.on('new_post', function(data) {
@@ -168,7 +168,7 @@ sa študent doposiaľ snažil vyriešiť aktuálnu úlohu. Druhá položka poč�
 prijatia posledného riešenia.
 
 Neaktívni študenti sú takí, ktorí dlhšiu neodošlú pokus o
-riešenie úlohy. Môže to  byť zapríčínené tým, že nerozumejú zadaniu úlohy, nevedia ju
+riešenie úlohy. Môže to  byť zapríčinené tým, že nerozumejú zadaniu úlohy, nevedia ju
 riešiť alebo len príliš dlho rozmýšľajú nad riešením. Taktiež príliš veľa pokusov
 o riešenie úlohy indikuje zaseknutie alebo len drobnú chybu v riešení.
 V prípade, že počet pokusov alebo čas od posledného
@@ -193,9 +193,9 @@ naspodu je ukazovateľ pokroku (progress bar), ktorý zobrazuje koľko úloh ch�
 študentovi vyriešiť do úspešného konca. Jeho dĺžka sa počíta z vopred nastavenej
 koncovej úlohy.
 
-Takáto jednoduchá vizualizácia nám dáva iba čiastočný prehľad s najdôležitejšími
+Takáto jednoduchá vizualizácia nám dáva prehľad s najdôležitejšími
 informáciami, ktoré pomáhajú vyučujúcemu v lepšej a rýchlejšej orientácii medzi
-študentmi. O každom študentovi máme zaznamenanú aktivitu počas celého cvičenia.
+študentmi na cvičení. O každom študentovi máme však zaznamenanú aktivitu počas celého cvičenia.
 Kliknutím na \glqq krabičku\grqq ~sa zobrazí detailný pohľad priebehu cvičenia
 konkrétneho študenta.
 
@@ -216,7 +216,7 @@ Po skončení cvičenia sa zobrazí tabuľka všetkých zúčastnených študent
 	\item Počet bonusových bodov za cvičenie
 \end{itemize}
 
-V tomto zozname vieme vyhľadávať a taktiež ho aj zoraďiť podľa jednotlivých položiek.
+V tomto zozname vieme vyhľadávať a taktiež ho aj zoradiť podľa jednotlivých položiek.
 Po kliknutí na jednotlivé riadky sa zobrazí okno s riešeniami študenta, v ktorom môže vyučujúci pridať hodnotenie úloh a komentár k nemu. Chceli sme tento proces
 zautomatizovať a ušetriť vyučujúceho od zbytočného manuálneho hodnotenia. Pridali sme
 teda tlačítko, ktoré pošle na server požiadavku automaticky obodovať riešenia.
@@ -256,7 +256,7 @@ Výsledným vstupom do MD5 hašovacej funkcie je teda nasledujúci reťazec, kde
 
 Tento nami vygenerovaný haš porovnáme s tým, ktorý vygenerovala aplikácia GTA.
 Ak sa rovnajú, študentovi pripočítame množstvo bodov, ktoré prislúcha
-danej úlohe. Podľa toho, či je táto úloha nastavená ako bonus tieto body pridelíme
+danej úlohe. Podľa toho, či je táto úloha nastavená ako bonus, tieto body pridelíme
 do stĺpca \textit{bonus} alebo \textit{score}.
 
 Takto ohodnotené riešenia je následne možné exportovať do csv súboru, ktorý je
@@ -265,7 +265,7 @@ potom ľahko importovateľný do systému Moodle, kde študenti uvidia svoje hod
 \section{Detekcia rôznych spôsobov riešenia úloh}
 \label{sec:solutionclusterizing}
 
-Fundamentálny problém, ktorý tvorí významnú rolu v rôznych disciplinách ako sú rozpoznávanie vzorov, spracovanie obrazu, strojové učenie a štatistika sa nazýva problém
+Fundamentálny problém, ktorý tvorí významnú rolu v rôznych disciplínach ako sú rozpoznávanie vzorov, spracovanie obrazu, strojové učenie a štatistika sa nazýva problém
 zhlukovania. V základe je zhlukovanie definované ako problém hľadania
 homogénnych skupín z danej množiny dát pomocou metódy bez učiteľa (unsupervised
 learning). Každá z týchto skupiniek nesie názov
@@ -281,7 +281,7 @@ sme sa rozhodli použiť metódu strojového učenia \textit{K-means}.
 \label{sec:solutionclusterizing:kmeans}
 
 Najjednoduchšou formou zhlukovania je rozdeľovanie jednotlivých objektov do
-disjunktných podmnožín, tak že splnia špecifické kritériá. Každá z týchto množín je reprezentovaná takzvaným \textit{centroid}-om, ktorý je stredom (ťažiskom) celého zhluku.
+disjunktných podmnožín tak, že splnia špecifické kritériá. Každá z týchto množín je reprezentovaná takzvaným \textit{centroid}-om, ktorý je stredom (ťažiskom) celého zhluku.
 Najrozšírenejšie kritérium je \textit{kritérium chyby clustera}, ktoré pre každý
 jeden objekt spočíta jeho štvorcovú vzdialenosť od centroidu a potom vezme
 súčet týchto vzdialeností pre celý cluster. Veľmi populárnou metódou, ktorá minimalizuje
@@ -438,7 +438,7 @@ $$C(A,B)=\cos(\theta)=
 
 Táto podobnosť sa spravidla počíta v priestore s nezápornými hodnotami na súradniciach,
 kde výsledok je ohraničený v intervale $[0,1]$. Všimnime si, že dva vektory sú si
-maximálne podobné, ak sú paralelné a maximálne odlišné ak sú na seba kolmé.
+maximálne podobné, ak sú paralelné a naopak maximálne odlišné, ak sú na seba kolmé.
 Kosínusová vzdialenosť je komplementárna ku kosínusovej podobnosti.
 $$d_C(A,B)=1-C(A,B)$$
 

@@ -1,8 +1,7 @@
 \chapter{Návrh aplikácie}
 \label{kap:navrh}
 
-V tejto kapitole uvedieme informácie o návrhu aplikácie a použitých nástrojoch
-pri implementácii.
+V tejto kapitole uvedieme informácie o architektúre našej aplikácie, návrhu databázy a význam jej tabuliek, spôsob akým budeme údaje od študentov prenášať, zadefinujeme akcie, ktoré vyvolávajú tento prenos a popíšeme fremework Node.js spolu s modulmi, ktoré sme sa rozhodli použiť.
 
 \section{Architektúra toku dát}
 \label{sec:architekturadata}
@@ -14,7 +13,7 @@ pri implementácii.
 \end{figure}
 
 Obrázok \ref{img:architekturadata} ilustruje tok dát. Každý študent v učebni pracuje
-na počítačí v Linuxovom termináli. V ňom beží aplikácia GTA, ktorá odosiela dáta
+na počítači v Linuxovom termináli. V ňom beží aplikácia GTA, ktorá odosiela dáta
 priamo na server šifrované pomocou TLS. Ten ich spracuje, patrične uloží v databáze
 a okamžite pošle vyučujúcim, kde sa zobrazia vo webovom rozhraní.
 
@@ -44,7 +43,7 @@ levelov.
 
 Všetkým vyučujúcim sa uloží vytvorený účet do tabuľky \textit{User}.
 Heslo sa ukladá do stĺpca \textit{password}. Aby sme skryli heslo pred útočníkom,
-je zahešované funkciou \textit{bcrypt} pred uložením do databázy.
+je zahašované funkciou \textit{bcrypt} pred uložením do databázy.
 
 V požiadavkách na systém je aj možnosť obodovať jednotlivé riešenia študentov.
 Tieto body sa ukladajú do tabuľky \textit{Evaluate}. Pri hodnotení budeme rozlišovať
@@ -59,7 +58,7 @@ na ktorom študent pracuje. Toto rozmiestnenie uložíme ako JSON objekt skonver
 do textu v stĺpci \textit{positions} a priradíme konkrétnemu vyučujúcemu.
 
 Tabuľka \textit{Alternative} slúži na nastavenie alternatívneho mena pre študenta.
-Keďže niektorí študenti pracujú na vlastných počítačoch, ich používateľske meno
+Keďže niektorí študenti pracujú na vlastných počítačoch, ich používateľské meno
 nekorešponduje s menom v systéme Moodle a pri importovaní bodov z csv súboru
 by nastala chyba.
 
@@ -135,7 +134,7 @@ Položka \textit{level} označuje level, v ktorom sa študent nachádza. Položk
 \label{sec:zbieraniedat:gtadata:passed}
 
 Keď študent prejde level, namiesto typu \textit{command} odošleme \textit{passed},
-kedže chceme mať záznam o tom, akým príkazom sa študentovi podarilo prejsť daný level.
+keďže chceme mať záznam o tom, akým príkazom sa študentovi podarilo prejsť daný level.
 
 \begin{lstlisting}[language=json,firstnumber=1]
 {
@@ -176,7 +175,8 @@ na ohodnotenie.
 \label{sec:zbieraniedat:help}
 
 Keď študent potrebuje pomôcť s úlohou, odošle príkaz, ktorý upozorní vyučujúcich.
-Záznam sa uloží do databázi a vyučujúci tak získa prehľad o počte žiadostí
+Záznam sa uloží do databázy %moje oci
+ a vyučujúci tak získa prehľad o počte žiadostí
 o pomoc v jednotlivých leveloch.
 
 \begin{lstlisting}[language=json,firstnumber=1]
@@ -216,12 +216,12 @@ Node.js je multiplatformový open-source softvér, ktorý spúšťa JavaScriptov
 kód na strane servera. Je primárne určený na programovanie webových serverov.
 Historicky sa JavaScript používal ako skriptovací jazyk
 na strane klienta, kde tento skript bol vložený v HTML stránke a prehliadač ho vedel
-stiahnuť a spustiť. Kedže Node.js ponúka vývojárom spúšťanie skriptov na strane servera,
-otvára sa možnosť na dynamické generovanie stránok predtým, ako sú odoslané do
+stiahnuť a spustiť. Keďže Node.js ponúka vývojárom spúšťanie skriptov na strane servera,
+otvára sa možnosť na dynamického generovania stránok predtým, ako sú odoslané do
 prehliadača. Ďalej utilizuje takzvanú \glqq JavaScript všade\grqq~paradigmu, ktorá
-hovorí o tom, že kód webových aplikácií na strane servera a na strane klienta nepoužíva rozdielne programovacie jazky.~\cite{bib:nodejs}
+hovorí o tom, že kód webových aplikácií na strane servera a na strane klienta nepoužíva rozdielne programovacie jazyky.~\cite{bib:nodejs}
 
-Prvý krát bola táto technológia predstavená na konferencii European JSConf v roku 2009.
+Prvýkrát bola táto technológia predstavená na konferencii European JSConf v roku 2009.
 Jej autor, Ryan Dahl, kritizoval, že majoritná väčšina programovacích jazykov
 na strane servera zbytočne čaká na odpoveď vstupno-výstupnej operácie, alebo
 výsledku z databázy. Preto cieľom Node.js je poskytnúť neblokujúci a udalosťami
@@ -236,7 +236,7 @@ o niekoľko z nich. Nižšie si uvedieme podrobnejšie informácie o týchto mod
 \label{sec:nodejs:expressjs}
 
 Express.js je jeden z najpoužívanejších frameworkov pre Node.js. Jeho flexibilnosť
-a minimalizmus ponúkajú pohodlhný a rýchly vývoj webových aplikácií.
+a minimalizmus ponúkajú pohodlný a rýchly vývoj webových aplikácií.
 Veľa vylepšení je dostupných v podobe pluginov, ktoré si môžeme nainštalovať z NPM
 databázy. My využijeme architektúru \textit{model-view-controller} (MVC). Najskôr príde
 požiadavka na server, ktorú obsluhuje \textit{controller}. Pri obsluhovaní
@@ -274,8 +274,8 @@ obmedzenia. Problém s WebSocketom je, že niektoré staršie prehliadače ho ne
 WebSocketu vytvoriť spojenie. Ak by sme sa teda rozhodli použiť čisto WebSocket
 protokol, musíme rátať s tým, že naša aplikácia nemusí fungovať správne na všetkých
 zariadeniach. Modul Socket.io rieši tento problém. Zariadenia, ktoré
-podporujú WebSocket budú fungovať naďalej bez zmeny, kdežto pre tie, ktoré ho
-nepodporujú sa Socket.io bude snažiť nájsť najlepšiu možnu alternatívu v
+podporujú WebSocket budú fungovať naďalej bez zmeny a pre tie, ktoré ho
+nepodporujú, sa Socket.io bude snažiť nájsť najlepšiu možnú alternatívu v
 nasledujúcom poradí:
 \begin{enumerate}
 	\item WebSocket
@@ -296,7 +296,7 @@ klienta.~\cite{bib:raisocketio,bib:walshwebsocket}
 
 V našej aplikácii potrebujeme autentizovať užívateľov. Prístup do webového
 rozhrania aplikácie môže mať len vyučujúci. Passport.js je vhodným modulom
-do Node.js aplikácii dobre integrovateľný s Express.js frameworkom.
+do Node.js aplikácií dobre integrovateľný s Express.js frameworkom.
 Podporuje viacero metód autentizácie, napríklad aj OAuth2, Auth0...
 My pre jednoduchosť využijeme štandardný prístup pomocou mena a hesla.
 Kvalitná dokumentácia~\cite{bib:passportjsdocs} tohto modulu nám pomohla pri

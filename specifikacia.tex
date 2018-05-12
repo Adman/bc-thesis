@@ -1,7 +1,7 @@
 \chapter{Špecifikácia}
 \label{kap:specifikacia}
 
-Táto kapitola obsahuje informácie o monitorovacích systémoch, textových advetúrach a špecifikáciu našej aplikácie.
+Táto kapitola obsahuje základné informácie o monitorovacích systémoch a textových advetúrach, kde všade sme sa s nimi mohli stretnúť, predstavuje základnú motiváciu pre našu bakalársku prácu a popisuje špecifikáciu našej aplikácie.
 
 \section{Monitorovacie systémy}
 \label{sec:monitorsystems}
@@ -13,7 +13,7 @@ zbierajú dáta, ktoré vieme vyhodnocovať a predísť podobným prípadom v bu
 Priblížme si niektoré typy monitorovacích systémov.
 
 \textit{Sieťové} sledujú dostupnosť webových služieb, mailových serverov, využitie
-diskového priestoru, oneskorenie odpovede alebo možný DDoS útok. Následne vedia informovať administrátora o týchto skutočnostiach. Príkladom takéhoto systému je Zabbix.
+diskového priestoru, oneskorenie odpovede alebo možný DDoS útok. Následne vedia informovať administrátora o týchto skutočnostiach. Príkladom takéhoto systému je \textit{Zabbix}.
 ~\cite{bib:networkmonitoring}
 
 \textit{Softvérové} zbierajú informácie o vyťažovaní procesorov, RAM pamäte, celkovom
@@ -29,7 +29,7 @@ blížiacou sa prírodnou katastrofou.
 
 Všetky tieto systémy majú dôležité spoločné črty. Vedia zbierať dáta, spracovávať ich,
 vyhodnocovať, vizualizovať a informovať administrátorov a používateľov o neštandardnom
-správaní. My sa v tejto práci budeme venovať taktiež monitorovaciemu systému, ktorý ale sleduje aktivitu študentov na cvičení.
+správaní. My sa v tejto práci budeme venovať taktiež monitorovaciemu systému, ktorý sleduje aktivitu študentov na cvičení.
 
 \section{Textové adventúry}
 \label{sec:textadventures}
@@ -58,7 +58,7 @@ Ako už samotný názov napovedá, GTA aplikácia je naprogramovaná v programov
 jazyku Go.
 
 Študentov cvičením sprevádza vopred vygenerovaný samorozbaľovací skript. Cvičenie
-je rozdelené do takzvaných levelov. Každý level začína vypísaním zadania priamo do
+je rozdelené do takzvaných \textit{levelov}. Každý level začína vypísaním zadania priamo do
 terminálu. Následne je používateľ vyzvaný napísať príkaz v termináli. Ak zadaný príkaz
 vráti správny výstup, skript pošle používateľa do ďalšieho levelu. Vďaka tomu
 študent nemusí prepínať medzi zadaním a terminálom, a taktiež má priamo overenú
@@ -158,16 +158,16 @@ sa vyjadrilo, že niektoré úlohy boli náročné a namiesto jednej vyučovacej
 strávili na cvičení dve až tri.
 Je dôležité, aby si tvorcovia jednotlivých úloh na cvičenie vedeli spätne pozrieť
 ich náročnosť a poprípade v budúcnosti upraviť zadanie.
-Zaujímavé dáta, ktoré chceme o každom študentovi zobraziť sú čas strávený riešením cvičenia a počet príkazov. Ďalej sú to priemery časov riešenia všetkých študentov,
-počtu príkazov, a následne grafy, ako sa zmenila obtiažnosť cvičenia oproti ostatným.
+Zaujímavé dáta, ktoré chceme o každom študentovi zobraziť, sú čas strávený riešením cvičenia a počet príkazov. Ďalej sú to priemery časov riešenia všetkých študentov,
+počtu príkazov, a následne grafy, ako sa zmenila obtiažnosť cvičenia oproti ostatným.%tejto poslednej vete nerozumiem - ake grafy zmeny obtiaznosti
 
 
 \subsection{Automatické obodovanie jednotlivých riešení a exportovanie bodov do csv súboru}
 \label{sec:apprequirements:export}
 
 Kurz prebieha v e-learningovom systéme Moodle. Každý študent si tam vie prezerať
-svoje body za cvičenia, testy, nájde tam prednášky a iné materiály. Systém Moodle akceptuje aj takzvaný
-csv súbor hodnotenia, ktorý prednášajúci nahrá a body budú automaticky pridelené
+svoje body za cvičenia, testy, nájde tam prednášky a iné materiály. Systém Moodle akceptuje aj formát
+\textit{csv}, v ktorom prednášajúci nahrá súbor hodnotenia a body budú automaticky pridelené
 študentom. Preto chceme, aby náš systém vedel poskytnúť rozhranie pre automatické
 obodovanie jednotlivých úloh a ich následný export v csv formáte.
 
@@ -178,7 +178,7 @@ obodovanie jednotlivých úloh a ich následný export v csv formáte.
 majú problém pochopiť zadanie. Náš systém bude detegovať neaktívnych študentov, ktorí
 nevykonali žiadnu akciu po dobu $n$ minút. Systém následne upozorní vyučujúcich o tejto
 skutočnosti a tí môžu pomôcť študentom.
-Taktiež bude upozorňovať vyučujúcich pokiaľ sa študentovi nepodarí prejsť level
+Taktiež bude upozorňovať vyučujúcich, pokiaľ sa študentovi nepodarí prejsť level
 po určitom počte príkazov.
 
 \subsection{Detekcia rôznych spôsobov riešenia úloh}
@@ -187,6 +187,6 @@ po určitom počte príkazov.
 Veľa z úloh, ktoré sa vyskytujú na cvičeniach má viacero spôsobov riešenia. Vo väčšine
 prípadov aj študenti nerozmýšľajú úplne rovnako pri riešení. Preto chceme vyučujúcemu
 poskytnúť cennú spätnú väzbu o týchto spôsoboch. Získa tak prehľad
-o tom, či študenti porozumeli prednáške a v budúcnosti sa môže zamerať na zlepšení
+o tom, či študenti porozumeli prednáške a v budúcnosti sa tak môže zamerať na zlepšenie
 výkladu učiva, poprípade sa viac sústrediť na to, čo študentom nešlo. Taktiež
-to môže byť použité pri podozrení na plagiarizmus.
+tento prehľad môže byť použitý pri podozrení na plagiátorstvo.
