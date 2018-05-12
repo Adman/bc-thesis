@@ -1,7 +1,10 @@
 \chapter{Návrh aplikácie}
 \label{kap:navrh}
 
-V tejto kapitole uvedieme informácie o architektúre našej aplikácie, návrhu databázy a význam jej tabuliek, spôsob akým budeme údaje od študentov prenášať, zadefinujeme akcie, ktoré vyvolávajú tento prenos a popíšeme fremework Node.js spolu s modulmi, ktoré sme sa rozhodli použiť.
+V tejto kapitole uvedieme informácie o architektúre našej aplikácie, návrhu databázy a
+význam jej tabuliek, spôsob, akým budeme údaje od študentov prenášať, zadefinujeme akcie,
+ktoré vyvolávajú tento prenos a popíšeme fremework Node.js spolu s modulmi, ktoré sme sa
+rozhodli použiť.
 
 \section{Architektúra toku dát}
 \label{sec:architekturadata}
@@ -175,8 +178,7 @@ na ohodnotenie.
 \label{sec:zbieraniedat:help}
 
 Keď študent potrebuje pomôcť s úlohou, odošle príkaz, ktorý upozorní vyučujúcich.
-Záznam sa uloží do databázy %moje oci
- a vyučujúci tak získa prehľad o počte žiadostí
+Záznam sa uloží do databázy a vyučujúci tak získa prehľad o počte žiadostí
 o pomoc v jednotlivých leveloch.
 
 \begin{lstlisting}[language=json,firstnumber=1]
@@ -217,7 +219,7 @@ kód na strane servera. Je primárne určený na programovanie webových servero
 Historicky sa JavaScript používal ako skriptovací jazyk
 na strane klienta, kde tento skript bol vložený v HTML stránke a prehliadač ho vedel
 stiahnuť a spustiť. Keďže Node.js ponúka vývojárom spúšťanie skriptov na strane servera,
-otvára sa možnosť na dynamického generovania stránok predtým, ako sú odoslané do
+otvára sa možnosť na dynamické generovanie stránok predtým, ako sú odoslané do
 prehliadača. Ďalej utilizuje takzvanú \glqq JavaScript všade\grqq~paradigmu, ktorá
 hovorí o tom, že kód webových aplikácií na strane servera a na strane klienta nepoužíva rozdielne programovacie jazyky.~\cite{bib:nodejs}
 
@@ -266,7 +268,7 @@ komunite sme sa rozhodli použiť Sequelize v našej aplikácii.
 \label{sec:nodejs:socketio}
 
 WebSocket~\cite{bib:fette2011websocket} je komunikačný protokol, ktorý poskytuje full-duplex asynchrónnu komunikáciu cez
-jediné TCP spojenie. Využíva \textit{ws} (nezabezpečený) alebo \textit{wss} (bezpečný)
+jediné TCP spojenie. Využíva \textit{ws} (nezabezpečený) alebo \textit{wss} (zabezpečený)
 protokol. Nie je limitovaný ako napríklad AJAX, kde klient musí najskôr vytvoriť
 požiadavku na server. Server aj klient si môžu posielať správy jeden druhému bez
 obmedzenia. Problém s WebSocketom je, že niektoré staršie prehliadače ho nepodporujú.

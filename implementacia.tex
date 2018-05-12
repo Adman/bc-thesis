@@ -55,7 +55,7 @@ napíše nejaký príkaz do terminálu a potvrdí ho enterom. Vtedy odošleme te
 server \textit{wget}-om.
 Dáta posielame vo formáte JSON. Znaky v položke \textit{command} sme kódovali
 pomocou funkcie \verb'urlencode', ktorá zabezpečovala, že znaky ako medzera nám
-nepokazila fungovanie odosielania. Niektoré UTF-8 znaky boli zle kódované, čo
+nepokazili fungovanie odosielania. Niektoré UTF-8 znaky boli zle kódované, čo
 spôsobovalo chyby na strane servera pri spracovávaní dát funkciou \verb'JSON.parse'.
 Preto sme sa rozhodli použiť kódovanie pomocou \verb'base64'.
 
@@ -167,7 +167,7 @@ rieši. Druhý riadok je rozdelený na dve položky. Vľavo zobrazujeme koľkým
 sa študent doposiaľ snažil vyriešiť aktuálnu úlohu. Druhá položka počíta čas od
 prijatia posledného riešenia.
 
-Neaktívni študenti sú takí, ktorí dlhšiu neodošlú pokus o
+Neaktívni študenti sú takí, ktorí dlhšiu dobu neodošlú pokus o
 riešenie úlohy. Môže to  byť zapríčinené tým, že nerozumejú zadaniu úlohy, nevedia ju
 riešiť alebo len príliš dlho rozmýšľajú nad riešením. Taktiež príliš veľa pokusov
 o riešenie úlohy indikuje zaseknutie alebo len drobnú chybu v riešení.
@@ -188,7 +188,7 @@ periodicky každých päť sekúnd spúšťa funkcia, ktorá každému študento
 
 Nižšie, v riadku s čiernym pozadím, sa nachádza posledný príkaz, ktorým sa študent
 snaží vyriešiť úlohu. V prípade neúspešného riešenia môže vyučujúci nahliadnuť na
-tento príkaz, zistiť kde robí študent chybu, ísť k nemu osobne a poradiť. Úplne
+tento príkaz, zistiť, kde robí študent chybu, ísť k nemu osobne a poradiť. Úplne
 naspodu je ukazovateľ pokroku (progress bar), ktorý zobrazuje koľko úloh chýba
 študentovi vyriešiť do úspešného konca. Jeho dĺžka sa počíta z vopred nastavenej
 koncovej úlohy.
@@ -241,7 +241,7 @@ s riešením.
 Vstupmi do tohto hašu sú 3 hlavné položky: \textit{názov cvičenia},
 \textit{názov úlohy} a \textit{domovský priečinok študenta}. Tie sú ešte skombinované
 s písmenkami \textbf{i}, \textbf{j}, \textbf{k} a \textbf{l}. V GTA aplikácii vznikla
-pri programovaní zaujímava chyba. Pri vytvárani vstupu do MD5 hašovacej funkcie
+pri programovaní zaujímavá chyba. Pri vytvárani vstupu do MD5 hašovacej funkcie
 sa očakáva názov úlohy ako celé číslo (integer). Názov úlohy je ale vždy reprezentovaný
 ako reťazec znakov. Po vložení tohto reťazca do číselného formátu jazyk Go vygeneruje
 výstup \verb'%!d(string=level)',
@@ -265,7 +265,8 @@ potom ľahko importovateľný do systému Moodle, kde študenti uvidia svoje hod
 \section{Detekcia rôznych spôsobov riešenia úloh}
 \label{sec:solutionclusterizing}
 
-Fundamentálny problém, ktorý tvorí významnú rolu v rôznych disciplínach ako sú rozpoznávanie vzorov, spracovanie obrazu, strojové učenie a štatistika sa nazýva problém
+Fundamentálny problém, ktorý tvorí významnú rolu v rôznych disciplínach ako sú
+rozpoznávanie vzorov, spracovanie obrazu, strojové učenie a štatistika, sa nazýva problém
 zhlukovania. V základe je zhlukovanie definované ako problém hľadania
 homogénnych skupín z danej množiny dát pomocou metódy bez učiteľa (unsupervised
 learning). Každá z týchto skupiniek nesie názov
@@ -285,7 +286,7 @@ disjunktných podmnožín tak, že splnia špecifické kritériá. Každá z tý
 Najrozšírenejšie kritérium je \textit{kritérium chyby clustera}, ktoré pre každý
 jeden objekt spočíta jeho štvorcovú vzdialenosť od centroidu a potom vezme
 súčet týchto vzdialeností pre celý cluster. Veľmi populárnou metódou, ktorá minimalizuje
-túto chybu je algoritmus \textit{K-means}. Predpokladá, že objekty s ktorými pracuje
+túto chybu je algoritmus \textit{K-means}. Predpokladá, že objekty, s ktorými pracuje,
 sú vektory. Je všeobecne známe, že táto metóda dosť
 závisí od náhodného výberu centroidov na začiatku a niekedy môže vyžadovať viacero
 reštartov.~\cite{bib:globalkmeans}
@@ -378,7 +379,7 @@ nachádzajú bezprostredne za sebou. Môžu to byť fonémy, slabiky, písmená 
 V našom prípade sa môže stať, že rovnaký prepínač
 je použitý v dvoch rôznych podpríkazoch, kde zastáva rozdielne funkcionality. 
 Preto sme sa rozhodli spraviť bigramy, kde prepínače a argumenty spojíme do dvojice
-s príkazom a operátory a samotné mená príkazov ostanú ako unigramy. Z hore uvedeného
+s príkazom, a operátory a samotné mená príkazov ostanú ako unigramy. Z hore uvedeného
 príkazu v príklade teda dostaneme nasledujúcu reprezentáciu:
 $$\Big\{\verb'cat',~\verb'cat file.txt',~\verb'|',~\verb'grep',~\verb'grep ^ab[0-9]+',$$
 $$\verb'grep -n',~\verb'grep -o',~\verb'grep [0-9]+',~\verb'>',~

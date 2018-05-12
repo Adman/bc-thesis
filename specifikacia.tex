@@ -1,7 +1,9 @@
 \chapter{Špecifikácia}
 \label{kap:specifikacia}
 
-Táto kapitola obsahuje základné informácie o monitorovacích systémoch a textových advetúrach, kde všade sme sa s nimi mohli stretnúť, predstavuje základnú motiváciu pre našu bakalársku prácu a popisuje špecifikáciu našej aplikácie.
+Táto kapitola obsahuje základné informácie o monitorovacích systémoch a textových
+adventúrach, kde všade sme sa s nimi mohli stretnúť, predstavuje základnú motiváciu pre
+našu bakalársku prácu a popisuje špecifikáciu našej aplikácie.
 
 \section{Monitorovacie systémy}
 \label{sec:monitorsystems}
@@ -24,7 +26,7 @@ program \textit{top}, respektíve \textit{htop}.
 
 Na monitorovanie \textit{počasia} sú taktiež využívané rôznorodé senzory a satelity.
 Pomocou nich vieme získavať cenné dáta o aktuálnom stave počasia takmer hocikde
-na zemi, ktoré sú zúžitkované na predpovede alebo varovanie obyvateľstva pred
+na zemi, ktoré sú zužitkované na predpovede alebo varovanie obyvateľstva pred
 blížiacou sa prírodnou katastrofou.
 
 Všetky tieto systémy majú dôležité spoločné črty. Vedia zbierať dáta, spracovávať ich,
@@ -79,7 +81,8 @@ počítajú rôzne štatistické údaje z dát a podobne.
 
 Do akademického roku 2015/2016 študenti na cvičeniach vytvárali príkazy v
 termináli, a keď si boli istí, že fungujú, tak ich skopírovali a poslali na obodovanie.
-Neskôr, od roku 2016/2017 vznikol projekt go-term-adventures (\ref{sec:motivacia:gta}), vďaka ktorému sa
+Neskôr, od roku 2016/2017 vznikol projekt go-term-adventures
+(viď sekciu \ref{sec:motivacia:gta}), vďaka ktorému sa
 cvičenia stali viac interaktívnejšími a aj práca na nich sa zefektívnila.
 
 V akademickom roku 2016/2017 si kurz Linux pre používateľov na FMFI UK zapísalo
@@ -89,7 +92,7 @@ Pri tak veľkom počte študentov je ťažké zisťovať, kto sa zasekol na dane
 Taktiež sa vyskytlo veľa problémov s príliš podobnými riešeniami a nemožnosť riešiť podozrenie z opisovania priamo na cvičení komplikovalo hodnotenie.
 
 Riešenia úloh študenti posielali ako textový súbor so zoznamom príkazov do systému
-Moodle a hodnotiaci si ich vždy musel sťahovať aby videl obsah. Človek je
+Moodle a hodnotiaci si ich vždy musel sťahovať, aby videl obsah. Človek je
 tvor zábudlivý, čo sa potvrdilo aj na tomto kurze. Mnohokrát sa stalo, že študent
 zabudol odovzdať tento textový súbor, a tým pádom mu hodnotiaci nemohol prideliť
 body za dané cvičenie, čo prinieslo mnoho problémov nielen študentovi, ale aj
@@ -116,7 +119,7 @@ V nasledujúcich bodoch zhrnieme požiadavky na našu aplikáciu:
 	\item Detekcia rôznych spôsobov riešenia úloh
 \end{itemize}
 
-Nižšie sa pozrieme naše požiadavky podrobnejšie.
+Nižšie sa pozrieme na naše požiadavky podrobnejšie.
 
 \subsection{Zbieranie dát z GTA aplikácie od všetkých študentov}
 \label{sec:apprequirements:gtadata}
@@ -158,8 +161,7 @@ sa vyjadrilo, že niektoré úlohy boli náročné a namiesto jednej vyučovacej
 strávili na cvičení dve až tri.
 Je dôležité, aby si tvorcovia jednotlivých úloh na cvičenie vedeli spätne pozrieť
 ich náročnosť a poprípade v budúcnosti upraviť zadanie.
-Zaujímavé dáta, ktoré chceme o každom študentovi zobraziť, sú čas strávený riešením cvičenia a počet príkazov. Ďalej sú to priemery časov riešenia všetkých študentov,
-počtu príkazov, a následne grafy, ako sa zmenila obtiažnosť cvičenia oproti ostatným.%tejto poslednej vete nerozumiem - ake grafy zmeny obtiaznosti
+Zaujímavé dáta, ktoré chceme o každom študentovi zobraziť, sú čas strávený riešením cvičenia a počet príkazov. Ďalej sú to priemery a mediány časov riešenia všetkých študentov a počtu príkazov.
 
 
 \subsection{Automatické obodovanie jednotlivých riešení a exportovanie bodov do csv súboru}
