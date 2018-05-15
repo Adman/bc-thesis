@@ -78,7 +78,7 @@ ktoré odosiela GTA aplikácia.
 \end{lstlisting}
 
 Pred samotným spracovaním sa kontroluje, či je IP adresa
-obsiahnutá v položke \textbf{IP} povolená (sekcia~\ref{sec:gtadataprocessing:ipfilter}).
+obsiahnutá v položke \textbf{ip} povolená (sekcia~\ref{sec:gtadataprocessing:ipfilter}).
 Následne sa kontroluje, či je v čase odoslania požiadavky niektorá inštancia z
 cvičení aktívna
 a zároveň má rovnaké \textit{id} ako to v požiadavke. Ak sú všetky tieto podmienky
@@ -115,7 +115,7 @@ Pri vytváraní týchto inštancií v administrátorskom rozhraní je nutné zad
 využívame knižnicu \textit{node-schedule}. Tá ponúka definovanie takzvaných
 \textit{cronjob}-ov, ktoré sú vykonávané periodicky. My sme toto volanie nastavili
 na každú minútu. Zavolá sa funkcia, ktorá preverí, či je možné preklopiť stav
-niektorej z inštancií.
+niektorej z inštancií na nasledujúci.
 
 \begin{lstlisting}[language=JavaScript]
 schedule.scheduleJob("* * * * *", check_state);
@@ -159,7 +159,7 @@ function is_ip_allowed(ip)
 \label{sec:vizualization}
 
 Vyučujúcemu potrebujeme zobrazovať o každom študentovi iba najdôležitejšie informácie.
-Preto sme si zvolili prehľadnú \glqq krabičku\grqq ~(obrázok~\ref{img:userbox}).
+Preto sme si navrhli prehľadnú \glqq krabičku\grqq ~(obrázok~\ref{img:userbox}).
 V prvom riadku zobrazujeme používateľské meno študenta a pre lepšiu orientáciu
 v učebni aj takzvaný \textit{hostname}, ktorý určuje meno počítača, na ktorom
 študent pracuje. V pravom hornom rohu je zobrazený aktuálny názov úlohy, ktorú študent
@@ -291,7 +291,8 @@ sú vektory. Je všeobecne známe, že táto metóda dosť
 závisí od náhodného výberu centroidov na začiatku a niekedy môže vyžadovať viacero
 reštartov.~\cite{bib:globalkmeans}
 
-Algoritmus funguje v štyroch základných krokoch:
+Algoritmus funguje v štyroch základných krokoch (vizualizácia na
+obrázku~\ref{img:kmeanssteps}):
 \begin{enumerate}
 	\item Voľba $k$ počiatočných centroidov
 	\item Každý vektor z množiny dát je priradený do clustera s najbližším centroidom
@@ -353,7 +354,7 @@ Naša knižnica taktiež podporuje interpretovanie týchto premenných, avšak m
 využívať nepotrebujeme. Počas používania tejto knižnice sme narazili na problém,
 kde regulárny výraz obsahoval identifikátor konca riadku \textbf{\$}.
 Funkcia na parsovanie sa ho snažila interpretovať ako premennú. Keďže nenašla žiadnu
-nastavenú hodnotu, tak túto premennú interpretuje ako prázdny reťazec, čo spôsobí
+nastavenú hodnotu, tak túto premennú interpretovala ako prázdny reťazec, čo spôsobilo
 premazanie znaku \textbf{\$}. Preto sme sa rozhodli opraviť túto chybu vo vlastnom
 klone tejto knižnice a ponechávať tento znak v reťazci pokiaľ sa nenájde prislúchajúca
 hodnota.
