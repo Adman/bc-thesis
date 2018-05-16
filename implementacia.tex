@@ -1,10 +1,7 @@
 \chapter{Implementácia}
 \label{kap:implementacia}
 
-V tejto kapitole uvedieme dôležité a zaujímavé časti z kódu aplikácie. Bližšie sa
-pozrieme na prihlasovanie do aplikácie, spracovávanie dát, vizualizovanie priebehu
-cvičenia, automatické hodnotenie riešení a detegovanie rôznych spôsobov riešenia pomocou
-K-means.
+V tejto kapitole uvedieme dôležité a zaujímavé časti z kódu aplikácie. Bližšie sa pozrieme na prihlasovanie do aplikácie, spracovávanie dát, vizualizovanie priebehu cvičenia, spôsoby akým je možné hodnotiť riešenia a detegovanie rôznych spôsobov riešenia pomocou K-means.
 
 \section{Autentizácia}
 \label{sec:authentication}
@@ -244,7 +241,7 @@ s riešením.
 Vstupmi do tohto hašu sú 3 hlavné položky: \textit{názov cvičenia},
 \textit{názov úlohy} a \textit{domovský priečinok študenta}. Tie sú ešte skombinované
 s písmenkami \textbf{i}, \textbf{j}, \textbf{k} a \textbf{l}. V GTA aplikácii vznikla
-pri programovaní zaujímavá chyba. Pri vytvárani vstupu do MD5 hašovacej funkcie
+pri programovaní zaujímavá chyba. Pri vytváraní vstupu do MD5 hašovacej funkcie
 sa očakáva názov úlohy ako celé číslo (integer). Názov úlohy je ale vždy reprezentovaný
 ako reťazec znakov. Po vložení tohto reťazca do číselného formátu jazyk Go vygeneruje
 výstup \verb'%!d(string=level)',
