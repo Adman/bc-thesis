@@ -2,7 +2,7 @@
 \label{kap:testovanie}
 
 V tejto kapitole zhrnieme výsledky z testovania aplikácie na cvičeniach kurzu Linux
-pre používateľov.
+pre používateľov a ukážeme si možnosti vizualizovania zozbieraných riešení našou aplikáciou.
 
 \section{Priebeh testovania a funkčnosť systému}
 \label{sec:funkcnost}
@@ -25,10 +25,10 @@ nahradiť \verb'urlencode' metódou \verb'base64'.
 Na konci semestra sme požiadali vyučujúcich o zhodnotenie aplikácie a jej prínos
 na cvičeniach.
 
-Efektivita sa v porovnaní s minulým rokom zvýšila zásadne, nakoľko je možné preemptívne
-zasiahnuť a zastaviť sa pri študentovi, o ktorom je jasné, že je zaseknutý namiesto
-toho, aby sme museli čakať, kedy sa prihlási. Tiež veľmi pomáha, že vieme odhadnúť,
-kedy približne cvičenie skončí, kedže vidíme, v ktorom leveli sa nachádzajú jednotliví
+Postrehli, že v porovnaní s minulým rokom sa efektivita zásadne zvýšila, nakoľko je možné preemptívne
+zasiahnuť a zastaviť sa pri študentovi, o ktorom je jasné, že je zaseknutý, namiesto
+toho, aby museli čakať, kedy sa prihlási. Tiež sa dá lepšie odhadnúť,
+kedy približne cvičenie skončí, pretože aplikácia zobrazuje, v ktorom leveli sa nachádzajú jednotliví
 študenti.
 
 Druhým najvýraznejším prínosom aplikácie je možnosť klasifikovať riešenia.
@@ -37,8 +37,8 @@ možnosť sústrediť sa v prednáške na študentmi nepochopené učivo.
 
 Vyučujúci taktiež hodnotia pozitívne implementáciu príkazu \verb'gta_help', vďaka
 ktorej mohli študenti upozorniť vyučujúcich a požiadať o pomoc. My máme takto záznamy
-v databáze a mohli by sme následne vyhodnotiť, pri ktorých úlohach študenti žiadali
-najviac o pomoc. Avšak, tento príkaz mohli študenti používať až od polovice semestra.
+v databáze a mohli by sme následne vyhodnotiť, pri ktorých úlohách študenti žiadali
+o pomoc najviac. Avšak, tento príkaz mohli študenti používať až od polovice semestra.
 Preto boli zvyknutí sa hlásiť klasicky zdvihnutím ruky a tento príkaz
 využívali veľmi sporadicky. Z toho dôvodu nemáme relevantné dáta k vyhodnoteniu
 potreby pomoci v jednotlivých úlohách.
@@ -94,10 +94,10 @@ trvaní cvičení.\\
 Klasifikácia riešení metódou \textit{K-means} nám priniesla veľmi zaujímavé výsledky.
 Pri testovaní zhlukovania príkazov sa špeciálne bigramy javia ako
 lepšia reprezentácia vstupu. Pri príkazoch s nízkym počtom podpríkazov a argumentov
-stačia aj unigramy. Niekedy je nutné spustiť algoritmus viackrát kvôli náhodnosti
+stačia aj unigramy. Niekedy je nutné spustiť algoritmus viackrát, kvôli náhodnosti
 výberu počiatočných centroidov.
 
-Nižšie uvádzame príklady troch správnych riešení úlohy, v ktorej mali študenti v súbore 
+Nižšie uvádzame príklady troch správnych riešení úlohy, v ktorej mali študenti v súbore \textit{cases.py}
 nájsť definíciu funkcie, v ktorej sa nachádza slovo \textit{page}. Každé z riešení sa
 dostalo do jedného z clusterov. V tabuľke~\ref{tab:distances} môžme vidieť vzdialenosti
 medzi jednotlivými riešeniami.
